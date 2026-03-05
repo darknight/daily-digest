@@ -1,0 +1,230 @@
+{
+  "date": "2026-03-05",
+  "summarizedAt": "2026-03-05T02:43:48.584Z",
+  "model": "zhipu:glm-4.7-flash",
+  "summaries": [
+    {
+      "id": "tag:google.com,2005:reader/item/00064c3af2166b59",
+      "title": "How Axios uses AI to help deliver high-impact local journalism",
+      "link": "https://openai.com/index/axios-allison-murphy",
+      "feedTitle": "OpenAI News",
+      "published": 1772582400,
+      "summary": "Axios COO Allison Murphy 阐述了公司如何利用 AI 支持本地记者，优化新闻工作流程，并实现大规模的高影响力本地新闻交付，展示了 AI 在媒体行业的应用价值。",
+      "tags": [
+        "AI",
+        "新闻",
+        "Axios",
+        "本地新闻",
+        "自动化"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c36dd299925",
+      "title": "Extending single-minus amplitudes to gravitons",
+      "link": "https://openai.com/index/extending-single-minus-amplitudes-to-gravitons",
+      "feedTitle": "OpenAI News",
+      "published": 1772618400,
+      "summary": "一项新预印本研究将单减振幅理论推广至引力子，并借助 GPT-5.2 Pro 成功推导并验证了量子引力中的非零引力子树振幅，展示了 AI 在数学物理领域的潜力。",
+      "tags": [
+        "量子引力",
+        "AI",
+        "数学",
+        "引力子",
+        "GPT"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c36dd299923",
+      "title": "Understanding AI and learning outcomes",
+      "link": "https://openai.com/index/understanding-ai-and-learning-outcomes",
+      "feedTitle": "OpenAI News",
+      "published": 1772582400,
+      "summary": "OpenAI 发布了“学习成果测量套件”，旨在长期评估 AI 在多样化教育环境中对学生学习的影响，以帮助教育者理解技术的实际效用。",
+      "tags": [
+        "OpenAI",
+        "AI",
+        "教育",
+        "学习",
+        "测量"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c39bd09d5ac",
+      "title": "LangSmith CLI ＆ Skills",
+      "link": "https://blog.langchain.com/langsmith-cli-skills/",
+      "feedTitle": "LangChain Blog",
+      "published": 1772647231,
+      "summary": "LangSmith 发布了 CLI 和技能，旨在赋予 AI 编码代理 LangSmith 生态系统的专业知识。通过添加追踪、构建数据集和评估性能等功能，技能显著提升了代理在测试集上的表现。",
+      "tags": [
+        "LangSmith",
+        "AI",
+        "CLI",
+        "工具",
+        "开发者"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c39bd09d5ab",
+      "title": "LangChain Skills",
+      "link": "https://blog.langchain.com/langchain-skills/",
+      "feedTitle": "LangChain Blog",
+      "published": 1772647219,
+      "summary": "LangChain 推出了首个技能集，为 AI 编码代理在 LangChain、LangGraph 和 DeepAgents 生态系统中提供专业知识。这些技能涵盖工具调用、中间件和持久化执行等核心功能，大幅提升了 Claude Code 的任务完成率。",
+      "tags": [
+        "LangChain",
+        "AI",
+        "LangGraph",
+        "DeepAgents",
+        "编程"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c3744408f3d",
+      "title": "Anti-patterns: things to avoid",
+      "link": "https://simonwillison.net/guides/agentic-engineering-patterns/anti-patterns/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1772645682,
+      "summary": "Simon Willison 指出了智能体工程中常见的反模式，即不经审查就将代理生成的代码提交给他人。他强调开发者应确保代码可运行、变更足够小并审查 PR 描述，以维护团队协作效率。",
+      "tags": [
+        "智能体",
+        "反模式",
+        "代码审查",
+        "协作",
+        "工程实践"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c3744408f3c",
+      "title": "Something is afoot in the land of Qwen",
+      "link": "https://simonwillison.net/2026/Mar/4/qwen/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1772639403,
+      "summary": "Simon Willison 报道了阿里巴巴 Qwen 团队近期发生的人员变动，核心研究员 Junyang Lin 及多位关键成员突然离职。文章探讨了此次变动可能对 Qwen 3.5 及未来开源项目的影响。",
+      "tags": [
+        "Qwen",
+        "阿里巴巴",
+        "人员变动",
+        "开源",
+        "团队"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c36dd299924",
+      "title": "Parametricity, or Comptime is Bonkers",
+      "link": "https://noelwelsh.com/posts/comptime-is-bonkers/",
+      "feedTitle": "Noel Welsh",
+      "published": 1772582400,
+      "summary": "文章探讨了 Rust 中的参数性，即类型签名如何强制函数实现（如恒等函数），以及 Zig 的 `comptime` 关键字如何放弃这一约束。作者认为理解参数性有助于理解 Zig 设计的权衡及其在模块化方面的优势。",
+      "tags": [
+        "Rust",
+        "类型理论",
+        "编程语言",
+        "参数性",
+        "Zig"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c3667ced9b7",
+      "title": "Always-on detections: eliminating the WAF “log versus block” trade-off",
+      "link": "https://blog.cloudflare.com/attack-signature-detection/",
+      "feedTitle": "The Cloudflare Blog",
+      "published": 1772636400,
+      "summary": "Cloudflare 推出新一代托管规则，通过“攻击签名检测”和“全事务检测”解决了 WAF 在日志与阻断模式间的权衡问题。该技术能在任何操作前检查恶意载荷，无需牺牲性能即可提供完整可见性，并能分析完整 HTTP 事务以减少误报，发现反射型 SQL 注入等深层威胁。",
+      "tags": [
+        "Cloudflare",
+        "WAF",
+        "安全",
+        "Web应用防火墙",
+        "攻击检测"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c3667ced9b6",
+      "title": "Mind the gap: new tools for continuous enforcement from boot to login",
+      "link": "https://blog.cloudflare.com/mandatory-authentication-mfa/",
+      "feedTitle": "The Cloudflare Blog",
+      "published": 1772632800,
+      "summary": "针对远程访问中设备安装后未登录及会话过期导致的安全缺口，Cloudflare 推出了“强制认证”功能。该工具要求设备在启动时必须完成认证才能访问互联网，结合 Cloudflare 的 MFA，确保了从开机到登录的全链路可见性和安全性，消除了网络安全的“黑暗角落”。",
+      "tags": [
+        "Cloudflare",
+        "零信任",
+        "远程访问",
+        "强制认证",
+        "网络安全"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c3667ced9b5",
+      "title": "Defeating the deepfake: stopping laptop farms and insider threats",
+      "link": "https://blog.cloudflare.com/deepfakes-insider-threats-identity-verification/",
+      "feedTitle": "The Cloudflare Blog",
+      "published": 1772604000,
+      "summary": "针对利用深度伪造和被盗身份进行的“远程 IT 工人”欺诈及内部威胁，Cloudflare 与 Nametag 合作推出了身份验证零信任解决方案。该方案通过在 SASE 平台上引入连续身份保证，解决传统背景检查无法识别伪造身份的问题，有效防止身份冒用和知识产权窃取。",
+      "tags": [
+        "Cloudflare",
+        "零信任",
+        "深度伪造",
+        "身份验证",
+        "内部威胁"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c33e2c08632",
+      "title": "2136 年，人类发明了超光速引擎",
+      "link": "https://ameow.xyz/archives/human-invented-hyperdrive-in-2135",
+      "feedTitle": "阿猫的博客",
+      "published": 1772620952,
+      "summary": "内容不足，无法生成摘要",
+      "tags": [
+        "科幻",
+        "小说",
+        "超光速"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c32cbed5b8e",
+      "title": "跨域传递 NSManagedObjectContext 为什么在 Swift 6.2 中不再报错？真正的变化不在编译器",
+      "link": "https://fatbobman.com/zh/posts/sendable-nsmanagedobjectcontext/",
+      "feedTitle": "肘子的 Swift 记事本 ｜ Fatbobman's Blog",
+      "published": 1772632800,
+      "summary": "针对 Swift 6.2 中跨域传递 NSManagedObjectContext 不再报错的现象，本文指出问题根源并非编译器优化，而是 Core Data SDK 接口的变化。通过对比发现，Xcode 26 版本的头文件中新增了 NS_SWIFT_NONISOLATED 和 NS_SWIFT_SENDABLE 标记，这改变了 Swift 对该类的并发处理方式。",
+      "tags": [
+        "Swift",
+        "Core Data",
+        "并发",
+        "iOS",
+        "编译器"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c3667ced9b4",
+      "title": "Moving from license plates to badges: the Gateway Authorization Proxy",
+      "link": "https://blog.cloudflare.com/gateway-authorization-proxy-identity-aware-policies/",
+      "feedTitle": "The Cloudflare Blog",
+      "published": 1772604000,
+      "summary": "为了解决无法在终端设备安装客户端时的身份验证难题，Cloudflare 推出了网关授权代理。该方案利用浏览器原生代理能力，在设备访问互联网前进行身份验证，取代了基于 IP 的旧模式。它支持多种身份提供商，实现了基于用户身份而非设备 IP 的精细化策略执行。",
+      "tags": [
+        "Cloudflare",
+        "网关",
+        "授权代理",
+        "身份验证",
+        "网络安全"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c3667ced9b3",
+      "title": "Stop reacting to breaches and start preventing them with User Risk Scoring",
+      "link": "https://blog.cloudflare.com/adaptive-access-user-risk-scoring/",
+      "feedTitle": "The Cloudflare Blog",
+      "published": 1772604000,
+      "summary": "Cloudflare One 引入了用户风险评分功能，旨在将安全策略从被动响应转向主动预防。该功能基于用户行为（如不可能的旅行、多次登录失败等）实时计算风险分数，并将其集成到零信任网络访问策略中。通过整合内部和外部遥测数据，系统能更智能地动态调整访问权限。",
+      "tags": [
+        "Cloudflare",
+        "零信任",
+        "用户风险评分",
+        "安全策略",
+        "身份安全"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+name: Daily Digest
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # UTC 00:00 = 北京时间 08:00
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+
+      - name: Fetch articles
+        run: pnpm run fetch
+        env:
+          FRESHRSS_API_URL: ${{ secrets.FRESHRSS_API_URL }}
+          FRESHRSS_USERNAME: ${{ secrets.FRESHRSS_USERNAME }}
+          FRESHRSS_PASSWORD: ${{ secrets.FRESHRSS_PASSWORD }}
+
+      - name: Summarize with AI
+        run: pnpm run summarize
+        env:
+          FRESHRSS_API_URL: ${{ secrets.FRESHRSS_API_URL }}
+          FRESHRSS_USERNAME: ${{ secrets.FRESHRSS_USERNAME }}
+          FRESHRSS_PASSWORD: ${{ secrets.FRESHRSS_PASSWORD }}
+          AI_MODEL: ${{ vars.AI_MODEL || 'zhipu:glm-4.7-flash' }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GOOGLE_GENERATIVE_AI_API_KEY: ${{ secrets.GOOGLE_GENERATIVE_AI_API_KEY }}
+          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+
+      - name: Render HTML
+        run: pnpm run render
+
+      - name: Commit data & pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ dist/
+          git diff --staged --quiet || git commit -m "chore: daily digest $(date +%Y-%m-%d)"
+          git push
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=daily-digest

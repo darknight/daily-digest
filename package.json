@@ -1,0 +1,36 @@
+{
+  "name": "daily-digest",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.29.3",
+  "scripts": {
+    "fetch": "tsx --env-file=.env scripts/fetch.ts",
+    "summarize": "tsx --env-file=.env scripts/summarize.ts",
+    "render": "tsx --env-file=.env scripts/render.ts",
+    "update": "pnpm run fetch && pnpm run summarize && pnpm run render",
+    "cf:preview": "wrangler pages dev ./dist"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.44",
+    "@ai-sdk/google": "^3.0.29",
+    "@ai-sdk/openai": "^3.0.29",
+    "@mozilla/readability": "^0.5.0",
+    "ai": "^6.0.86",
+    "jsdom": "^26.1.0",
+    "puppeteer-core": "^24.9.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^25.2.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.65.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "workerd"
+    ]
+  }
+}
