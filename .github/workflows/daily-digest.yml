@@ -11,6 +11,11 @@ jobs:
     permissions:
       contents: write
       deployments: write
+    services:
+      lightpanda:
+        image: lightpanda/browser:latest
+        ports:
+          - 9222:9222
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -26,6 +31,7 @@ jobs:
           FRESHRSS_API_URL: ${{ secrets.FRESHRSS_API_URL }}
           FRESHRSS_USERNAME: ${{ secrets.FRESHRSS_USERNAME }}
           FRESHRSS_PASSWORD: ${{ secrets.FRESHRSS_PASSWORD }}
+          LIGHTPANDA_URL: ws://localhost:9222
 
       - name: Summarize with AI
         run: pnpm run summarize
