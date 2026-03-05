@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      deployments: write
     services:
       lightpanda:
         image: lightpanda/browser:latest
@@ -56,9 +55,3 @@ jobs:
           git diff --staged --quiet || git commit -m "chore: daily digest $(date +%Y-%m-%d)"
           git push
 
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=daily-digest
