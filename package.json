@@ -5,9 +5,9 @@
   "private": true,
   "packageManager": "pnpm@10.29.3",
   "scripts": {
-    "fetch": "tsx --env-file=.env scripts/fetch.ts",
-    "summarize": "tsx --env-file=.env scripts/summarize.ts",
-    "render": "tsx --env-file=.env scripts/render.ts",
+    "fetch": "tsx --env-file-if-exists=.env scripts/fetch.ts",
+    "summarize": "tsx --env-file-if-exists=.env scripts/summarize.ts",
+    "render": "tsx scripts/render.ts",
     "update": "pnpm run fetch && pnpm run summarize && pnpm run render",
     "cf:preview": "wrangler pages dev ./dist"
   },
