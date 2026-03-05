@@ -27,7 +27,7 @@ const SUMMARIES_DIR = join(ROOT, "data/summaries");
 
 // ── Prompt ──────────────────────────────────────────────
 
-const SYSTEM_PROMPT = `You are a professional tech article summarization assistant. Your task is to generate concise Chinese summaries and tags for tech RSS articles.
+const SYSTEM_PROMPT = `You are a professional article summarization assistant. Your task is to generate concise Chinese summaries and tags for RSS articles.
 
 ## Output Format
 
@@ -43,7 +43,7 @@ You must return a strict JSON array (do not include markdown code block markers)
 ## Requirements
 
 - Summaries should be 100-200 Chinese characters, covering the core content and key insights of the article
-- 3-5 tags, using Chinese or common technical terms (e.g., React, Rust, AI)
+- 3-5 tags, using Chinese or common terms relevant to the article content
 - If the article content is insufficient or incomprehensible, write the summary as "内容不足，无法生成摘要"
 - Stay objective, do not add personal opinions`;
 
