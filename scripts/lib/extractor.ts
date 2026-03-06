@@ -75,18 +75,17 @@ async function extractWithLightpanda(url: string): Promise<string | null> {
     try {
       const page = await browser.newPage();
       await page.goto(url, { waitUntil: "networkidle2", timeout: FETCH_TIMEOUT });
-      const html = await page.content();
+
+      // Use Lightpanda's native markdown conversion via CDP
+      const client = (page as any)._client();
+      const { markdown } = await client.send("LP.getMarkdown", {});
       await page.close();
 
-      const dom = new JSDOM(html, { url });
-      const reader = new Readability(dom.window.document);
-      const article = reader.parse();
-
-      if (!article?.textContent || article.textContent.trim().length < 100) {
+      if (!markdown || markdown.trim().length < 100) {
         return null;
       }
 
-      const text = article.textContent.trim();
+      const text = markdown.trim();
       if (isBlockPage(text)) return null;
 
       return text;
