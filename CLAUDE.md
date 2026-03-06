@@ -52,6 +52,14 @@ render.ts → dist/ (index.html, archive.html, daily/*.html)
 
 Default: `zhipu:glm-4.7-flash` (free tier). Format: `provider:model`. Set via `AI_MODEL` env var. Each provider requires its corresponding API key env var (e.g., `ZHIPU_API_KEY`).
 
+## Git Rebase Conflict Resolution
+
+**CRITICAL**: During `git rebase`, `--ours` and `--theirs` are SWAPPED compared to `git merge`:
+- `git rebase`: `--ours` = the branch being rebased **onto** (upstream/remote), `--theirs` = your local commits
+- `git merge`: `--ours` = your current branch, `--theirs` = the branch being merged in
+
+When resolving conflicts during `git rebase`, use `git checkout --theirs <file>` to keep your local changes.
+
 ## Deployment
 
 Cloudflare Pages via `wrangler`. Two GitHub Actions workflows:
