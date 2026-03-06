@@ -27,25 +27,25 @@ const SUMMARIES_DIR = join(ROOT, "data/summaries");
 
 // ── Prompt ──────────────────────────────────────────────
 
-const SYSTEM_PROMPT = `You are a professional article summarization assistant. Your task is to generate concise Chinese summaries and tags for RSS articles.
+const SYSTEM_PROMPT = `你是一名专业的文章摘要助手。你的任务是为 RSS 文章生成简洁的中文摘要和标签。
 
-## Output Format
+## 输出格式
 
-You must return a strict JSON array (do not include markdown code block markers), with each element corresponding to one article:
+你必须返回一个严格的 JSON 数组（不要包含 markdown 代码块标记），每个元素对应一篇文章：
 [
   {
-    "id": "article ID",
-    "summary": "100-200 character Chinese summary",
-    "tags": ["tag1", "tag2", "tag3"]
+    "id": "文章 ID",
+    "summary": "100-200字的中文摘要",
+    "tags": ["标签1", "标签2", "标签3"]
   }
 ]
 
-## Requirements
+## 要求
 
-- Summaries should be 100-200 Chinese characters, covering the core content and key insights of the article
-- 3-5 tags, using Chinese or common terms relevant to the article content
-- If the article content is insufficient or incomprehensible, write the summary as "内容不足，无法生成摘要"
-- Stay objective, do not add personal opinions`;
+- 摘要应为 100-200 个中文字符，涵盖文章的核心内容和关键观点
+- 3-5 个标签，使用中文或与文章内容相关的常用术语
+- 如果文章内容不足或无法理解，根据标题生成一句简短的中文描述
+- 保持客观，不添加个人观点`;
 
 function buildBatchPrompt(articles: RawArticle[]): string {
   const blocks = articles
@@ -55,7 +55,7 @@ function buildBatchPrompt(articles: RawArticle[]): string {
     )
     .join("\n\n");
 
-  return `Generate Chinese summaries and tags for each of the following ${articles.length} articles. Return a JSON array, in the same order as the articles.
+  return `请为以下 ${articles.length} 篇文章分别生成中文摘要和标签。返回一个 JSON 数组，按文章顺序一一对应。
 
 ${blocks}`;
 }

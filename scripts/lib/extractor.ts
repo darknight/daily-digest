@@ -10,6 +10,19 @@ export interface ExtractionResult {
 
 const FETCH_TIMEOUT = 15_000;
 
+// Patterns that indicate bot-blocking / challenge pages rather than real content
+const BLOCK_PAGE_PATTERNS = [
+  /browser not supported.*security verification/is,
+  /enable javascript and cookies to continue/i,
+  /just a moment.*cloudflare/is,
+  /attention required.*cloudflare/is,
+  /checking your browser before accessing/i,
+];
+
+function isBlockPage(text: string): boolean {
+  return BLOCK_PAGE_PATTERNS.some((p) => p.test(text));
+}
+
 // ── L1: @mozilla/readability ────────────────────────────
 
 async function extractWithReadability(url: string): Promise<string | null> {
@@ -38,7 +51,10 @@ async function extractWithReadability(url: string): Promise<string | null> {
       return null;
     }
 
-    return article.textContent.trim();
+    const text = article.textContent.trim();
+    if (isBlockPage(text)) return null;
+
+    return text;
   } catch {
     return null;
   }
@@ -70,7 +86,10 @@ async function extractWithLightpanda(url: string): Promise<string | null> {
         return null;
       }
 
-      return article.textContent.trim();
+      const text = article.textContent.trim();
+      if (isBlockPage(text)) return null;
+
+      return text;
     } finally {
       browser.disconnect();
     }
