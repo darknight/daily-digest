@@ -1,6 +1,6 @@
 {
   "date": "2026-03-06",
-  "summarizedAt": "2026-03-06T00:29:59.087Z",
+  "summarizedAt": "2026-03-06T02:45:42.226Z",
   "model": "zhipu:glm-4.7-flash",
   "summaries": [
     {
@@ -112,6 +112,118 @@
         "Copyright",
         "Software Engineering",
         "Chardet"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c4c99ec4104",
+      "title": "Ensuring AI use in education leads to opportunity",
+      "link": "https://openai.com/index/ai-education-opportunity",
+      "feedTitle": "OpenAI News",
+      "published": 1772701200,
+      "summary": "内容不足，无法生成摘要",
+      "tags": []
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c4958895583",
+      "title": "Life Happens at 1x Speed",
+      "link": "https://terriblesoftware.org/2026/01/08/life-happens-at-1x-speed/",
+      "feedTitle": "Terrible Software",
+      "published": 1767877126,
+      "summary": "作者停止以2倍速消费内容，认为快速浏览导致消化不良和焦虑。真正的理解需要留白和无聊，生活本就在1x速度下进行，应注重质量而非数量。",
+      "tags": [
+        "个人成长",
+        "消费习惯",
+        "心理学",
+        "效率"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c4958895582",
+      "title": "Creating Your Own Opportunities",
+      "link": "https://terriblesoftware.org/2026/01/05/creating-your-own-opportunities/",
+      "feedTitle": "Terrible Software",
+      "published": 1767617441,
+      "summary": "工程师不应抱怨经理未提供成长机会，而应主动创造机会。通过识别杠杆点，将常规任务转化为高价值项目，这种主动性能显著提升个人职业发展。",
+      "tags": [
+        "职场发展",
+        "工程师",
+        "主动出击",
+        "职业成长"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c4958895581",
+      "title": "A Year of Writing for Myself (That 230,000+ People Read)",
+      "link": "https://terriblesoftware.org/2025/12/29/a-year-of-writing-for-myself-that-230000-people-read/",
+      "feedTitle": "Terrible Software",
+      "published": 1767018752,
+      "summary": "作者回顾博客首年获得超23万阅读量。虽然初衷是为了自我整理，但内容聚焦于工程管理与人际软技能，填补了市场上关于如何处理复杂人际关系的空白。",
+      "tags": [
+        "写作",
+        "职场",
+        "软技能",
+        "工程管理",
+        "个人博客"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c4958895580",
+      "title": "The Strange Case of Engineers Who Dismiss AI",
+      "link": "https://terriblesoftware.org/2025/12/19/the-strange-case-of-engineers-who-dismiss-ai/",
+      "feedTitle": "Terrible Software",
+      "published": 1766149332,
+      "summary": "作者反思了工程师对AI工具的抵触情绪，尽管过去经验不佳，但现在的AI工具已发生巨变。固执地拒绝新工具可能会阻碍职业成长，应保持开放心态。",
+      "tags": [
+        "AI",
+        "工程师",
+        "职业发展",
+        "开放心态",
+        "技术趋势"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c495889557f",
+      "title": "AI Can Write Your Code. It Can’t Do Your Job.",
+      "link": "https://terriblesoftware.org/2025/12/11/ai-can-write-your-code-it-cant-do-your-job/",
+      "feedTitle": "Terrible Software",
+      "published": 1765472771,
+      "summary": "程序员的核心工作不是写代码，而是解决问题和做决策。AI能替代编程任务，但无法取代工程师的判断力、沟通力和业务理解力。企业更愿意雇佣人才而非用AI替代。",
+      "tags": [
+        "AI",
+        "职业规划",
+        "工程师",
+        "决策力",
+        "软技能"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c495889557e",
+      "title": "What Actually Makes You Senior",
+      "link": "https://terriblesoftware.org/2025/11/25/what-actually-makes-you-senior/",
+      "feedTitle": "Terrible Software",
+      "published": 1764091788,
+      "summary": "资深工程师的核心能力在于降低模糊性，而非单纯写代码。他们能通过提问、厘清目标和假设，将模糊问题转化为可执行计划，这种风险规避能力是晋升的关键。",
+      "tags": [
+        "资深工程师",
+        "职业发展",
+        "问题解决",
+        "软技能",
+        "职场"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c495889557d",
+      "title": "“ChatGPT said this” Is Lazy",
+      "link": "https://terriblesoftware.org/2025/10/24/chatgpt-said-this-is-lazy/",
+      "feedTitle": "Terrible Software",
+      "published": 1761320220,
+      "summary": "在代码审查中盲目粘贴AI生成的反馈是懒惰的表现。AI缺乏具体业务背景和代码上下文，工程师应结合自身理解，用AI辅助思考但最终以自己的语言表达专业意见。",
+      "tags": [
+        "代码审查",
+        "AI",
+        "职场沟通",
+        "工程师",
+        "反馈"
       ]
     }
   ]
