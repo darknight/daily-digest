@@ -1,0 +1,77 @@
+{
+  "date": "2026-03-09",
+  "fetchedAt": "2026-03-09T00:25:24.846Z",
+  "articles": [
+    {
+      "id": "tag:google.com,2005:reader/item/00064c8a1df11922",
+      "title": "Prefix sums at tens of gigabytes per second with ARM NEON",
+      "link": "https://lemire.me/blog/2026/03/08/prefix-sums-at-tens-of-gigabytes-per-second-with-arm-neon/",
+      "published": 1773000588,
+      "feedId": "feed/94",
+      "feedTitle": "Daniel Lemire's blog",
+      "summary": "Suppose that you have a record of your sales per day. You might want to get a running record where, for each day, you are told how many sales you have made\nsince the start of the year.\n\n\n\nday\nsales per day\nrunning sales\n\n\n\n\n1\n10$\n10 $\n\n\n2\n15$\n25 $\n\n\n3\n5$\n30 $\n\n\n\nSuch an operation is called a prefix sum or a scan.\nImplementing it in C is not difficult. It is a simple loop.\n\n  for (size_t i = 1; i < length; i++) {\n    data[i] += data[i - 1];\n  }\n\n\nHow fast can this function be? We can derive a speed limit rather simply: to compute the current value, you must have computed the previous one, and so forth.\n\ndata[0] -> data[1] -> data[2] -> ...\n\n\nAt best, you require one CPU cycle per entry in your table. Thus, on a 4 GHz processor, you might process 4 billion integer values per second. It is an upper bound but you might be able to reach close to it in practice on many modern systems. Of course, there are other instructions involved such as loads, stores and branching, but our processors can execute many instructions per cycle and they can predict branches effectively. So you should be able to process billions of integers per second on most processors today.\nNot bad! But can we do better?\nWe can use SIMD instructions. SIMD instructions are special instructions that process several values at once. All 64-bit ARM processors support NEON instructions. NEON instructions can process four integers at once, if they are packed in one SIMD register.\nBut how do you do the prefix sum on a 4-value register? You can do it with two shifts and two additions. In theory, it scales as log(N) where N is the number\nelements in a vector register.\n\ninput   = [A B   C     D]\nshift1  = [0 A   B     C]\nsum1    = [A A+B B+C   C+D]\nshift2  = [0 0   A     B+A]\nresult  = [A A+B A+B+C A+B+C+D]\n\n\nYou can then extract the last value (A+B+C+D) and broadcast it to all positions so that you can add it to the next value.\nIs this faster than the scalar approach? We have 4 instructions in sequence, plus at least one instruction if you want to use the total sum in the next block of four values.\nThus the SIMD approach might be worse. It is disappointing.\nA solution might be the scale up over many more integer values.\nConsider ARM NEON which has interleaved load and store instructions. If you can load 16 values at once, and get all of the first values together, all of the second values together, and so forth.\n\noriginal data : ABCD EFGH IJKL MNOP\nloaded data   : AEIM BFJN CGKO DHLP\n\n\nThen I can do a prefix sum over the four blocks in parallel. It takes three instructions. At the end of the three instructions, we have one register which contains the local sums:\n\nA+B+C+D E+F+G+H I+J+K+L M+N+O+P\n\n\nAnd then we can apply our prefix sum recipe on this register (4 instructions). You might end up with something like 8 sequential instructions per block of 16 values.\nIt is theoretically twice as fast as the scalar approach.\nIn C with instrinsics, you might code it as follows.\n\nvoid neon_prefixsum_fast(uint32_t *data, size_t length) {\n  uint32x4_t zero = {0, 0, 0, 0};\n  uint32x4_t prev = {0, 0, 0, 0};\n\n  for (size_t i = 0; i < length / 16; i++) {\n    uint32x4x4_t vals = vld4q_u32(data + 16 * i);\n\n    // Prefix sum inside each transposed (\"vertical\") lane\n    vals.val[1] = vaddq_u32(vals.val[1], vals.val[0]);\n    vals.val[2] = vaddq_u32(vals.val[2], vals.val[1]);\n    vals.val[3] = vaddq_u32(vals.val[3], vals.val[2]);\n\n    // Now vals.val[3] contains the four local prefix sums:\n    //   vals.val[3] = [s0=A+B+C+D, s1=E+F+G+H, \n    //                  s2=I+J+K+L, s3=M+N+O+P]\n\n    // Compute prefix sum across the four local sums \n    uint32x4_t off = vextq_u32(zero, vals.val[3], 3);\n    uint32x4_t ps = vaddq_u32(vals.val[3], off);       \n    off = vextq_u32(zero, ps, 2);                      \n    ps = vaddq_u32(ps, off);\n\n    // Now ps contains cumulative sums across the four groups\n    // Add the incoming carry from the previous 16-element block\n    ps = vaddq_u32(ps, prev);\n\n    // Prepare carry for next block: broadcast the last lane of ps\n    prev = vdupq_laneq_u32(ps, 3);\n\n    // The add vector to apply to the original lanes is the \n    // prefix up to previous group\n    uint32x4_t add = vextq_u32(prev, ps, 3);  \n\n    // Apply carry/offset to each of the four transposed lanes\n    vals.val[0] = vaddq_u32(vals.val[0], add);\n    vals.val[1] = vaddq_u32(vals.val[1], add);\n    vals.val[2] = vaddq_u32(vals.val[2], add);\n    vals.val[3] = vaddq_u32(vals.val[3], add);\n\n    // Store back the four lanes (interleaved)\n    vst4q_u32(data + 16 * i, vals);\n  }\n\n  scalar_prefixsum_leftover(data, length, 16);\n}\n\n\nLet us try it out on an Apple M4 processor (4.5 GHz).\n\n\n\nmethod\nbillions of values/s\n\n\n\n\nscalar\n3.9\n\n\nnaive SIMD\n3.6\n\n\nfast SIMD\n8.9\n\n\n\nSo the SIMD approach is about 2.3 times faster than the scalar approach. Not bad.\nMy source code is available on GitHub.\nAppendix. Instrinsics\n\n\n\nIntrinsic\nWhat it does\n\n\n\n\nvld4q_u32\nLoads 16 consecutive 32-bit unsigned integers from memory and deinterleaves them into 4 separate uint32x4_t vectors (lane 0 = elements 0,4,8,12,…; lane 1 = 1,5,9,13,… etc.).\n\n\nvaddq_u32\nAdds corresponding 32-bit unsigned integer lanes from two vectors (a[i] + b[i] for each of 4 lanes).\n\n\nvextq_u32\nExtracts (concatenates a and b, then takes 4 lanes starting from lane n of the 8-lane concatenation). Used to implement shifts/rotates by inserting zeros (when a is zero vector).\n\n\nvdupq_laneq_u32\nBroadcasts (duplicates) the value from the specified lane (0–3) of the input vector to all 4 lanes of the result.\n\n\nvdupq_n_u32 (implied usage)\nSets all 4 lanes of the result to the same scalar value (commonly used for zero or broadcast).",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c88d811b584",
+      "title": "猫鱼周刊 vol. 094 龙虾大跃进",
+      "link": "https://ameow.xyz/archives/weekly-094",
+      "published": 1772987609,
+      "feedId": "feed/96",
+      "feedTitle": "阿猫的博客",
+      "summary": "关于本刊\n\n这是猫鱼周刊的第 95 期，本系列每周日更新，主要内容为每周收集内容的分享，同时发布在\n博客：阿猫的博客-猫鱼周刊\nRSS：猫鱼周刊\n邮件订阅：猫鱼周刊\n微信公众号：猫兄的和谐号列车\n私信：leslieleung@proton.me\n\nINIT\n又是一周，这周感觉做的自己的事情并不多，总体还是被工作消耗得比较厉害。首先是给之前做的 AI 文本生成检测 Aletheia 增加了一个新模型 DivEye，它的原理非常有意思，不需要针对新的大模型来做训练。另外就是尝试用本地的 qwen3.5-35b-a3b 模型写了一篇科幻短篇小说《2136 年，人类发明了超光速引擎》，效果出奇地好，整篇文章没什么 AI 味，逻辑、立意等都说得过去，足够我看得津津有味。\nSTDIN\n连龙虾都不会装的人，怎么会用龙虾呢?\n原文链接\n这周比较火的事情，就是腾讯举办了个活动，线下安装龙虾，吸引很多人参加，不少评论说是「一代人有一代人的鸡蛋要领」。当然了，这股「龙虾潮」其实已经持续一个多月了，我的信息流里铺天盖地都是关于龙虾的内容，甚至还有一些「同城上门装龙虾」、「龙虾一体机」之类的东西，更别提各路云厂商、AI 供应商、中转站借机大力营销。\n倒是有些言论非常清醒，例如「连龙虾都不会装的人，怎么会用龙虾呢?」。这句话显得有些傲慢，但是安装龙虾这件事其实真的非常简单，只要你愿意折腾，最多花上几个小时就能解决。如果你连这几个小时都不愿意折腾，只是「人有我有」地想买个门票，那真的不见得有龙虾你就能做成什么事情。\n不管是龙虾，抑或是其他被炒得很火的 Claude Code 等等，他们本质上都是工具，是你解决问题中的一环，它可以是万能钥匙，但前提是你有对应的问题要解决。或者按文章的话来说，「我到底有什么问题，值得交给 AI 去解决」，我觉得这才是大多数情况下要考虑的事情。\n大家给 Apple 的成绩单\n网站链接\n少数派的一个策划，邀请了一批嘉宾给苹果 2025 年的产品线、软件可靠性、硬件可靠性、服务、应用生态与开发者关系、社会责任与本地化这些维度去打分。\n\n不出所料，硬件可靠性这一项得分很高，倒是不知道为啥软件可靠性有点拉跨。这其实是我买苹果最大的原因，抛开电池的因素，苹果的产品可以说是最「耐用」的，七八年前的 iPhone 8 Plus 如今居然还挺好用，同时期的安卓手机估计已经入土很久了吧。iPhone 的得分高也不奇怪，今年的标准版也可以说是牙膏挤爆，给了高刷，如果没有专业需求，性价比真的拉满（之前我都是为了高刷才买的 Pro）；国补 5499 的 iPhone Air 其实性价比也非常高，那轻薄的手感是独一档的。\n虽然但是，今年我还是没有换手机，手上还在用 15 Pro。最近几代还没有什么让我欲罢不能的更新，也许国行 AI 功能的缺席也是一个很重要的原因，15 Pro 买的时候就说 Ready For Apple Intelligence，让我还蛮激动的，结果一直没端出来，算是有点「诈骗」。\nSTDOUT\nMake mistakes\n刚好前面说到 DivEye这种用来检测 AI 生成文本的方法，它的原理是用一个 LM（例如 GPT-2）去预测下一个 token，计算它与实际的文本的「惊喜程度」，例如文法和结构上的变化。很显然，人类的特点就是不稳定，缺乏完美，这也是「人性」之一。\n正好想起一部电影 Bicentennial Man，里面有个情节就是男主机器人 Andrew 和女主 Portia 关于「人性」的讨论，这是对应的剪辑，它的对白是这样的：\n\n\nTake chances, make mistakes.\nMistakes?\nYes! Sometimes it's important not to be perfect, okay? It's important to do the wrong thing.\nDo the wrong thing?\nYes!\nWhy? Oh, I see-- to learn from your mistakes.\nNo, to make them. To find out what's real and what's not. To find out what you feel. Human beings are terrible messes, Andrew.\nI'll grant you that. I see. This is what is known as an irrational conversation, isn't it?\nNo, this is a human conversation. It's not about being rational. It's about following your heart.\n\n\n人最大的特点就是会犯错、不完美、缺乏绝对理性，这是机器、AI 无法去实现的事情，他们的训练目标就是完美、尽可能少犯错。90 年代到千禧年左右有很多关于 AI 的电影，这部电影当时好像反响平平，但是现在 2026 年来看，确实立意很深远。\nMISC\nAppPorts\n项目链接\n一款 macOS 工具，无缝迁移应用到外部存储并自动建立链接。感觉对 256 GB 的机型应该会很有用。\nLanCache\n项目链接\n内网缓存工具，提前把 Steam 等平台的游戏下载到本地服务器上，然后通过 DNS 劫持、透明代理等实现本地传输加速下载。\n想起这个是因为在 B 站刷到博主宣传绿联和腾讯最近推出的一个新功能，所谓“NAS+游戏”生态。值得一提的是，其实 macOS 上也有类似的功能，叫做内容缓存，设置的方法也很简单。这对厂商来说最大的作用就是节约了很多带宽，这在 B 端来说也是一笔不小的钱。如果将来家家户户都有一个小型的 home server（其实现在的光猫再强大一点就行），这也许是一个不错的方案。\nsteam-lancache-prefill\n项目链接\n一个脚本工具，配合前面的 LanCache，可以不依赖 Steam 客户端触发缓存。\nEOF\n本周刊已在 GitHub 开源，欢迎 star。同时，如果你有好的内容，也欢迎投稿。如果你觉得周刊的内容不错，可以分享给你的朋友，让更多人了解到好的内容，对我也是一种认可和鼓励。（或许你也可以请我喝杯咖啡）\n另外，我建了一个交流群，欢迎入群讨论或反馈，可以通过文章头部的联系邮箱私信我获得入群方式。",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c87354bac10",
+      "title": "Quoting Joseph Weizenbaum",
+      "link": "https://simonwillison.net/2026/Mar/8/joseph-weizenbaum/#atom-everything",
+      "published": 1772981988,
+      "feedId": "feed/18",
+      "feedTitle": "Simon Willison's Weblog",
+      "summary": "8th March 2026\n\n\nWhat I had not realized is that extremely short exposures to a relatively simple computer program could induce powerful delusional thinking in quite normal people.\n— Joseph Weizenbaum, creator of ELIZA, in 1976 (via)\n\n\nPosted 8th March 2026 at 2:59 pm\n\n\n\n\n\nRecent articles\n\n  \n    Can coding agents relicense open source through a “clean room” implementation of code? - 5th March 2026\n  \n    Something is afoot in the land of Qwen - 4th March 2026\n  \n    I vibe coded my dream macOS presentation app - 25th February 2026\n  \n\n\n\n\n \n\n\nThis is a quotation collected by Simon Willison, posted on 8th March 2026.\n\n\n    \n        \n            computer-history\n            15\n        \n    \n        \n            internet-archive\n            16\n        \n    \n        \n            ai\n            1896\n        \n    \n        \n            ai-ethics\n            276",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c7e0f886a68",
+      "title": "AI 编程突然没日志了",
+      "link": "https://manateelazycat.github.io/2026/03/08/ai-log/",
+      "published": 1772899200,
+      "feedId": "feed/77",
+      "feedTitle": "Andy Stewart",
+      "summary": "今天开了 20 个 AI 在调 bug，但是遇到一个诡异的问题，就是打死都没有日志输出\n\n我吃完饭，我换了一个 AI，我说为什么没有日志输出？\n\n他说你原来的 AI 给你加了一个日志的过滤器，把所有的日志都过滤掉了🤣",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c7e0f886a67",
+      "title": "AI 编程怎么效率高?",
+      "link": "https://manateelazycat.github.io/2026/03/08/ai-programming/",
+      "published": 1772899200,
+      "feedId": "feed/77",
+      "feedTitle": "Andy Stewart",
+      "summary": "很多人问我 AI 编程为什么这么快的原因？\n\n我觉得有三个点：\n\n\n  \n    思路清晰：做为有研发背景的产品经理，我每天无时无刻不在想功能逻辑、内在需求和任务分解，加上懒猫清单高效管理，我在给 AI 任务之前已经是逻辑清晰目标明确的 “小任务”， 因为任务小，所以上下文小，所以 AI 精准打击，bug 少\n  \n  \n    善用 Plan 模式，很多人说 Plan 模式不就是 /plan 吗，有什么稀奇的？耗费人能量的是思考，AI 也是，所以要提高效率，就要用很多 Plan 并行，我每天运行 30 多个 AI，每个 AI 都用 Plan 和它聊天，Review 它的计划。这样我 90% 的时间都在聊天，一旦 30 多个计划细节边界都聊清楚，剩下的事情就很简单：执行、测试、Commit。关键是并行 Plan 可以节省你 90% 的时间， 而且把人的精力划分成上午思考，下午执行，这样避免人脑在思考、执行和测试之前来回横跳，效率自然就高得多了\n  \n  \n    多用 Guard，一旦 AI 把代码写对了，或者好不容易把 AI 中途改坏的代码又拉回来了，我最喜欢就是和 AI 盘点，为什么中途被改坏了？是文档需求不明确？还是代码逻辑有冲突？还是测试脚本过期了？这些把事情做对以后的盘点，并把盘点的内容再次融入到文档、代码和 CI 中的习惯，会减少以后增加功能的时候 AI 把已有功能改坏的几率，少回归，自然效率就高了\n  \n\n\n总结一下就是：目标清晰、并行 Plan、盘点正确的原因",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c7e0f886a66",
+      "title": "AI 编程中提示词是否重要？",
+      "link": "https://manateelazycat.github.io/2026/03/08/ai-prompt/",
+      "published": 1772899200,
+      "feedId": "feed/77",
+      "feedTitle": "Andy Stewart",
+      "summary": "今天朋友问，AI 编程提示词工程重不重要？\n\n\n  \n    提示词工程不重要，AI 能力够强不需要提示词\n  \n  \n    产品思维很重要，因为清晰的目标会让 AI 写清晰的代码，很多人一开始就写不好，是因为脑袋不清楚。事实上，很多研发逻辑思维很强，但是他们却不知道真实世界的需求是什么\n  \n  \n    编程经验在后期很重要，因为后期项目大了，上下文超出 AI 智商，AI 就会变笨，这时候编程经验让 AI 脱离大坑就需要编程素养了，因为你通过 AI 反复修不好的问答过程，你就知道 AI 困在什么地方，告诉它方向，它马上起飞\n  \n\n\n简单来说，AI 是一辆好的越野车，但是要到处都能开，司机越野经验也很重要\n\n没有编程经验，大型项目，后期 bug 满天飞",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c7e0f886a65",
+      "title": "面试最重要的三点",
+      "link": "https://manateelazycat.github.io/2026/03/08/hr/",
+      "published": 1772899200,
+      "feedId": "feed/77",
+      "feedTitle": "Andy Stewart",
+      "summary": "这两天招人招累了，给同事们分享一下面试人的经验\n\n我们公司面试人其实就看三点\n\n1.这个人是否诚实？怎么说呢？真正厉害的人的简历都是非常朴实的，以分享的观点在写。而那些水平不高的人，简历非常的花哨，把他前公司的所有的厉害的事情都写在他自己身上\n\n2.这个人是否喜欢学习？真正喜欢学习的人，他的成长经历都是细节满满的。而且你问他的问题，他都会一针见血地回复出来。而那些花哨的人，就会说一些看似非常正确却没有水平的话\n\n3.你是否愿意和这个人工作？这一点没有固定的识别方法，就完全是面试过程中，你感受对方的气场。如果对方是一个狂妄的、骄傲的，而且不真诚的人，你可以在你的第六感里面感受出来。简单一句就是，如果这个人今天跟你一起工作，你愿意和他工作吗？\n\n简单总结来说，诚实的人上限非常高。爱学习的人，不管他现在水平在什么地方，他以后一定会成长得非常快。很多谦虚的人组在一起，团队才能拧成一股绳。",
+      "contentSource": "readability"
+    }
+  ],
+  "skippedIds": []
+}
