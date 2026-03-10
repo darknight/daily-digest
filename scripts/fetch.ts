@@ -1,13 +1,13 @@
 /**
  * Step 1: Fetch unread articles from FreshRSS + fair scheduling + full-text extraction
  *
- * Idempotent: skips if data/articles/YYYY-MM-DD.json already exists
+ * Incremental: appends new articles to existing data/articles/YYYY-MM-DD.json
  * Fair scheduling: group by feed, quota MAX_TOTAL/MIN_PER_FEED/MAX_PER_FEED
  * Full-text extraction: readability -> Lightpanda -> RSS fallback chain
  * Excess articles marked as read
  */
 
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { FreshRSSClient, getArticleLink } from "./lib/freshrss-client.ts";
 import { extractFullText } from "./lib/extractor.ts";
@@ -84,10 +84,14 @@ async function main() {
   const outPath = join(ARTICLES_DIR, `${today}.json`);
   const isDryRun = process.argv.includes("--dry-run");
 
-  // Idempotency check
+  // Load existing articles for incremental mode
+  let existingArticles: RawArticle[] = [];
+  let existingSkippedIds: string[] = [];
   if (existsSync(outPath) && !isDryRun) {
-    console.log(`${outPath} already exists, skipping fetch`);
-    return;
+    const existing: DailyArticles = JSON.parse(readFileSync(outPath, "utf-8"));
+    existingArticles = existing.articles;
+    existingSkippedIds = existing.skippedIds;
+    console.log(`Loaded ${existingArticles.length} existing articles, fetching incrementally`);
   }
 
   // Validate env
@@ -110,13 +114,12 @@ async function main() {
   const allArticles = await client.getAllUnreadArticles();
   console.log(`Fetched ${allArticles.length} unread articles\n`);
 
-  if (allArticles.length === 0) {
-    console.log("No unread articles, skipping");
-    return;
-  }
-
   if (isDryRun) {
     console.log("--dry-run mode, showing stats only\n");
+    if (allArticles.length === 0) {
+      console.log("No unread articles");
+      return;
+    }
     const byFeed = new Map<string, Article[]>();
     for (const a of allArticles) {
       const feedId = a.origin?.streamId ?? "unknown";
@@ -130,9 +133,22 @@ async function main() {
     return;
   }
 
+  // Filter out already-processed articles (incremental mode)
+  const knownIds = new Set([
+    ...existingArticles.map((a) => a.id),
+    ...existingSkippedIds,
+  ]);
+  const newUnreadArticles = allArticles.filter((a) => !knownIds.has(a.id));
+  console.log(`New articles after filtering known IDs: ${newUnreadArticles.length}`);
+
+  if (newUnreadArticles.length === 0) {
+    console.log("No new unread articles, skipping");
+    return;
+  }
+
   // Group by feed
   const byFeed = new Map<string, Article[]>();
-  for (const a of allArticles) {
+  for (const a of newUnreadArticles) {
     const feedId = a.origin?.streamId ?? "unknown";
     if (!byFeed.has(feedId)) byFeed.set(feedId, []);
     byFeed.get(feedId)!.push(a);
@@ -174,16 +190,18 @@ async function main() {
     },
   );
 
-  // Save
+  // Save (merge with existing articles in incremental mode)
   mkdirSync(ARTICLES_DIR, { recursive: true });
+  const mergedArticles = [...existingArticles, ...rawArticles];
+  const mergedSkippedIds = [...existingSkippedIds, ...skipped.map((a) => a.id)];
   const result: DailyArticles = {
     date: today,
     fetchedAt: new Date().toISOString(),
-    articles: rawArticles,
-    skippedIds: skipped.map((a) => a.id),
+    articles: mergedArticles,
+    skippedIds: mergedSkippedIds,
   };
   writeFileSync(outPath, JSON.stringify(result, null, 2));
-  console.log(`\nSaved ${rawArticles.length} articles to ${outPath}`);
+  console.log(`\nSaved ${mergedArticles.length} articles (${existingArticles.length} existing + ${rawArticles.length} new) to ${outPath}`);
 
   // Mark skipped articles as read
   if (skipped.length > 0 && !process.env.NO_MARK_READ) {
