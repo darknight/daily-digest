@@ -1,0 +1,97 @@
+{
+  "date": "2026-03-10",
+  "summarizedAt": "2026-03-10T00:23:44.388Z",
+  "model": "zhipu:glm-4.7-flash",
+  "summaries": [
+    {
+      "id": "tag:google.com,2005:reader/item/00064c9afeea0b08",
+      "title": "OpenAI to acquire Promptfoo",
+      "link": "https://openai.com/index/openai-to-acquire-promptfoo",
+      "feedTitle": "OpenAI News",
+      "published": 1773050400,
+      "summary": "OpenAI 宣布收购 Promptfoo，这是一个专注于企业级 AI 安全的平台，旨在帮助开发者在开发过程中识别并修复 AI 系统中的漏洞。这一举措表明 OpenAI 正在加强其在企业级 AI 安全防护领域的布局，致力于为开发者提供更可靠的 AI 系统保障。",
+      "tags": [
+        "OpenAI",
+        "收购",
+        "AI安全",
+        "Promptfoo",
+        "企业级"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c9aa25c4890",
+      "title": "This week in #Scala (Mar 9, 2026)",
+      "link": "https://thisweekinscala.substack.com/p/this-week-in-scala-mar-9-2026",
+      "feedTitle": "This Week In #Scala",
+      "published": 1773067226,
+      "summary": "本周 Scala 摘要重点介绍了 Scala 3.8 的正式发布，以及 Apache Pekko HTTP 2.0-M1 等框架的更新。此外，还提及了 Cyfra、sttp-ai 等新工具，以及多门在线课程和即将举办的技术会议，为 Scala 开发者提供了丰富的资讯。",
+      "tags": [
+        "Scala",
+        "编程语言",
+        "开发",
+        "更新",
+        "学习"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c99ddac6494",
+      "title": "How we built LangChain’s GTM Agent",
+      "link": "https://blog.langchain.com/how-we-built-langchains-gtm-agent/",
+      "feedTitle": "LangChain Blog",
+      "published": 1773070213,
+      "summary": "LangChain 构建了一款 GTM（销售与营销）代理，旨在自动化销售团队的研究与邮件起草流程。该代理集成了 Salesforce 和 Slack，在大幅提高转化率和节省人力成本的同时，强调了“人在回路”的安全机制与可解释性，确保销售动作的质量与合规。",
+      "tags": [
+        "LangChain",
+        "AI代理",
+        "销售自动化",
+        "GTM",
+        "企业应用"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c97724a676b",
+      "title": "Macbook Neo：苹果重回校园的起点 - 肘子的 Swift 周报 #126",
+      "link": "https://fatbobman.com/zh/weekly/issue-126/",
+      "feedTitle": "肘子的 Swift 记事本 ｜ Fatbobman's Blog",
+      "published": 1773064800,
+      "summary": "文章分析了 MacBook Neo 的发布策略，认为其精准的定价是苹果重返教育市场的关键。尽管面临“减配”争议，但通过低价硬件结合 Apple Creator Studio，该产品旨在培养 Z 世代和 Alpha 世代对苹果生态的依赖，成为长期的生态锚点。",
+      "tags": [
+        "苹果",
+        "MacBook Neo",
+        "教育市场",
+        "生态",
+        "硬件"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c91dfc0795e",
+      "title": "LongCat 为 OpenClaw 装上效率引擎：你的自动化任务还能再快 30%",
+      "link": "https://tech.meituan.com/2026/03/09/longcat-openclaw.html",
+      "feedTitle": "美团技术团队",
+      "published": 1773014400,
+      "summary": "美团技术团队分享了 LongCat-Flash-Thinking-2601 在 OpenClaw 上的性能表现，称其执行效率比对比模型快约 30%。文章通过环境搭建、图像重绘、网页生成等多个实际场景，验证了该模型在本地 Agent 自动化任务中的高效与稳定。",
+      "tags": [
+        "LongCat",
+        "OpenClaw",
+        "AI Agent",
+        "自动化",
+        "效率"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064c8eb4a5108f",
+      "title": "品牌时代",
+      "link": "https://baoyu.io/translations/2026-03-05/the-brand-age-pg",
+      "feedTitle": "宝玉的分享",
+      "published": 1772928000,
+      "summary": "本文借瑞士钟表业的历史，探讨了当技术抹平产品实质差异后的“品牌时代”的到来。文章对比了“黄金时代”追求性能与“品牌时代”依赖品牌溢价的现象，指出企业必须从产品制造转型为品牌运营，以在竞争中生存。",
+      "tags": [
+        "品牌管理",
+        "商业历史",
+        "Paul Graham",
+        "瑞士钟表",
+        "竞争策略"
+      ]
+    }
+  ]
+}
