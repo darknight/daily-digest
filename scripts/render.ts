@@ -20,25 +20,25 @@ const DAILY_DIR = join(DIST_DIR, "daily");
 const CSS = `
 :root {
   --bg: #ffffff;
-  --bg-card: #f9fafb;
-  --text: #1a1a2e;
-  --text-secondary: #6b7280;
-  --border: #e5e7eb;
-  --accent: #3b82f6;
-  --tag-bg: #eff6ff;
-  --tag-text: #1d4ed8;
+  --card-bg: #f9f9f9;
+  --text: #333333;
+  --text-secondary: #666666;
+  --border: #e0e0e0;
+  --link: #1a73e8;
+  --tag-bg: #e8f0fe;
+  --tag-text: #1967d2;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0f172a;
-    --bg-card: #1e293b;
-    --text: #e2e8f0;
-    --text-secondary: #94a3b8;
-    --border: #334155;
-    --accent: #60a5fa;
-    --tag-bg: #1e3a5f;
-    --tag-text: #93c5fd;
+    --bg: #1a1a1a;
+    --card-bg: #2d2d2d;
+    --text: #e0e0e0;
+    --text-secondary: #999999;
+    --border: #404040;
+    --link: #8ab4f8;
+    --tag-bg: #303a4a;
+    --tag-text: #8ab4f8;
   }
 }
 
@@ -49,78 +49,58 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem;
+  padding: 20px;
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 2rem;
+.container { max-width: 800px; margin: 0 auto; }
+
+h1 { font-size: 1.5em; margin-bottom: 4px; }
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9em;
+  margin-bottom: 24px;
 }
 
-nav a {
-  color: var(--accent);
+.subtitle a {
+  color: var(--text-secondary);
   text-decoration: none;
+  margin-left: 12px;
 }
 
-nav a:hover { text-decoration: underline; }
-
-h1 { font-size: 1.5rem; }
-h2 { font-size: 1.25rem; margin-bottom: 1rem; }
+.subtitle a:hover { text-decoration: underline; }
 
 .card {
-  background: var(--bg-card);
+  background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 1.25rem;
-  margin-bottom: 1rem;
+  padding: 16px 20px;
+  margin-bottom: 12px;
 }
 
-.card-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
+.card h2 { font-size: 1.05em; margin-bottom: 6px; }
 
-.card-title a {
-  color: var(--text);
-  text-decoration: none;
-}
+.card h2 a { color: var(--link); text-decoration: none; }
 
-.card-title a:hover {
-  color: var(--accent);
-  text-decoration: underline;
-}
+.card h2 a:hover { text-decoration: underline; }
 
-.card-meta {
-  font-size: 0.85rem;
+.meta {
+  font-size: 0.8em;
   color: var(--text-secondary);
-  margin-bottom: 0.5rem;
-}
-
-.card-summary {
-  font-size: 0.95rem;
-  margin-bottom: 0.5rem;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
+  margin-bottom: 8px;
 }
 
 .tag {
-  font-size: 0.75rem;
+  display: inline-block;
   background: var(--tag-bg);
   color: var(--tag-text);
-  padding: 0.15rem 0.5rem;
+  font-size: 0.75em;
+  padding: 2px 8px;
   border-radius: 4px;
+  margin-right: 6px;
 }
+
+.summary { font-size: 0.92em; color: var(--text); }
 
 .pagination {
   display: flex;
@@ -131,7 +111,7 @@ h2 { font-size: 1.25rem; margin-bottom: 1rem; }
 }
 
 .pagination a {
-  color: var(--accent);
+  color: var(--link);
   text-decoration: none;
 }
 
@@ -153,7 +133,7 @@ h2 { font-size: 1.25rem; margin-bottom: 1rem; }
   justify-content: space-between;
 }
 
-.archive-list a:hover { color: var(--accent); }
+.archive-list a:hover { color: var(--link); }
 
 .archive-count {
   color: var(--text-secondary);
@@ -167,15 +147,15 @@ h2 { font-size: 1.25rem; margin-bottom: 1rem; }
 }
 
 @media (max-width: 600px) {
-  body { padding: 0.75rem; }
-  h1 { font-size: 1.25rem; }
-  .card { padding: 1rem; }
+  body { padding: 12px; }
+  h1 { font-size: 1.25em; }
+  .card { padding: 12px 16px; }
 }
 `;
 
 // ── Templates ───────────────────────────────────────────
 
-function htmlLayout(title: string, body: string, navExtra = ""): string {
+function htmlLayout(title: string, body: string): string {
   return `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -185,11 +165,9 @@ function htmlLayout(title: string, body: string, navExtra = ""): string {
   <style>${CSS}</style>
 </head>
 <body>
-  <nav>
-    <h1><a href="/">Daily Digest</a></h1>
-    <div>${navExtra}<a href="/archive.html">归档</a></div>
-  </nav>
-  ${body}
+<div class="container">
+${body}
+</div>
 </body>
 </html>`;
 }
@@ -202,21 +180,26 @@ function formatDate(timestamp: number): string {
   });
 }
 
+function formatSummary(text: string): string {
+  // Escape HTML first, then convert newline+bullet patterns to <br> for readability
+  let safe = escapeHtml(text);
+  // Convert lines starting with • or - into <br>• formatted bullets
+  safe = safe.replace(/\n[•\-]\s*/g, "\n    <br>• ");
+  // Convert remaining newlines to <br>
+  safe = safe.replace(/\n/g, "<br>");
+  return safe;
+}
+
 function renderArticleCard(article: ArticleSummary): string {
   const titleHtml = article.link
     ? `<a href="${escapeHtml(article.link)}" target="_blank" rel="noopener">${escapeHtml(article.title)}</a>`
     : escapeHtml(article.title);
 
-  const tags = article.tags
-    .map((t) => `<span class="tag">${escapeHtml(t)}</span>`)
-    .join("");
-
-  return `<article class="card">
-  <div class="card-title">${titleHtml}</div>
-  <div class="card-meta">${escapeHtml(article.feedTitle)} · ${formatDate(article.published)}</div>
-  <div class="card-summary">${escapeHtml(article.summary)}</div>
-  <div class="tags">${tags}</div>
-</article>`;
+  return `<div class="card">
+  <h2>${titleHtml}</h2>
+  <div class="meta"><span class="tag">${escapeHtml(article.feedTitle)}</span> ${formatDate(article.published)}</div>
+  <div class="summary">${formatSummary(article.summary)}</div>
+</div>`;
 }
 
 function escapeHtml(s: string): string {
@@ -245,11 +228,13 @@ function renderDailyPage(
     : "<span></span>";
   pagination += "</div>";
 
-  const body = daily.summaries.length > 0
-    ? `<h2>${daily.date} · ${daily.summaries.length} 篇</h2>\n${cards}\n${pagination}`
-    : `<div class="empty">当天没有文章</div>`;
+  const header = `<h1>RSS 每日摘要</h1>\n<p class="subtitle">${daily.date} · ${daily.summaries.length} 篇文章 <a href="/archive.html">归档</a></p>`;
 
-  return htmlLayout(`Daily Digest - ${daily.date}`, body);
+  const body = daily.summaries.length > 0
+    ? `${header}\n${cards}\n${pagination}`
+    : `${header}\n<div class="empty">当天没有文章</div>`;
+
+  return htmlLayout(`RSS 摘要 - ${daily.date}`, body);
 }
 
 function renderArchivePage(
@@ -262,21 +247,22 @@ function renderArchivePage(
     )
     .join("\n");
 
+  const header = `<h1>RSS 每日摘要</h1>\n<p class="subtitle">历史归档</p>`;
   const body = dailies.length > 0
-    ? `<h2>历史归档</h2>\n<ul class="archive-list">\n${items}\n</ul>`
-    : `<div class="empty">暂无日报</div>`;
+    ? `${header}\n<ul class="archive-list">\n${items}\n</ul>`
+    : `${header}\n<div class="empty">暂无日报</div>`;
 
-  return htmlLayout("Daily Digest - 归档", body);
+  return htmlLayout("RSS 摘要 - 归档", body);
 }
 
 function renderIndexPage(latest: DailySummaries | null): string {
   if (!latest || latest.summaries.length === 0) {
-    return htmlLayout("Daily Digest", '<div class="empty">暂无日报，请稍后再来</div>');
+    return htmlLayout("RSS 每日摘要", `<h1>RSS 每日摘要</h1>\n<p class="subtitle">暂无日报，请稍后再来</p>`);
   }
 
   const cards = latest.summaries.map(renderArticleCard).join("\n");
-  const body = `<h2>最新日报 · ${latest.date} · ${latest.summaries.length} 篇</h2>\n${cards}`;
-  return htmlLayout("Daily Digest", body);
+  const header = `<h1>RSS 每日摘要</h1>\n<p class="subtitle">${latest.date} · ${latest.summaries.length} 篇文章 <a href="/archive.html">归档</a></p>`;
+  return htmlLayout("RSS 每日摘要", `${header}\n${cards}`);
 }
 
 // ── Main ────────────────────────────────────────────────
