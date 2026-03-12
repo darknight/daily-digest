@@ -1,6 +1,6 @@
 {
   "date": "2026-03-12",
-  "summarizedAt": "2026-03-12T00:22:30.455Z",
+  "summarizedAt": "2026-03-12T04:37:20.260Z",
   "model": "zhipu:glm-4.7-flash",
   "summaries": [
     {
@@ -121,6 +121,21 @@
         "浏览器自动化",
         "Lightpanda",
         "智能体"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064cc9d1c514a8",
+      "title": "编程 Agent 如何重塑工程、产品和设计",
+      "link": "https://baoyu.io/translations/2026-03-11/coding-agents-reshaping-epd",
+      "feedTitle": "宝玉的分享",
+      "published": 1773187200,
+      "summary": "编程 Agent 的普及让软件开发流程发生巨变，传统 PRD 从核心枢纽转变为评审辅助。瓶颈从编码转移至评审，通才价值提升，系统思维成为核心竞争力。角色开始融合分化，通晓产品、工程和设计且善用 Agent 的“建设者”与负责把关的“评审者”成为新常态。",
+      "tags": [
+        "编程 Agent",
+        "EPD",
+        "软件开发",
+        "PRD",
+        "系统思维"
       ]
     }
   ]
