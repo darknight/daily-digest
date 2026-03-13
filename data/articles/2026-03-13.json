@@ -1,6 +1,6 @@
 {
   "date": "2026-03-13",
-  "fetchedAt": "2026-03-13T00:25:49.910Z",
+  "fetchedAt": "2026-03-13T04:36:01.877Z",
   "articles": [
     {
       "id": "tag:google.com,2005:reader/item/00064cdb78c32402",
@@ -70,6 +70,16 @@
       "feedId": "feed/18",
       "feedTitle": "Simon Willison's Weblog",
       "summary": "11th March 2026 - Link Blog\n\nSorting algorithms. Today in animated explanations built using Claude: I've always been a fan of animated demonstrations of sorting algorithms so I decided to spin some up on my phone using Claude Artifacts, then added Python's timsort algorithm, then a feature to run them all at once. Here's the full sequence of prompts:\n\nInteractive animated demos of the most common sorting algorithms\n\nThis gave me bubble sort, selection sort, insertion sort, merge sort, quick sort, and heap sort.\n\nAdd timsort, look up details in a clone of python/cpython from GitHub\n\nLet's add Python's Timsort! Regular Claude chat can clone repos from GitHub these days. In the transcript you can see it clone the repo and then consult Objects/listsort.txt and Objects/listobject.c. (I should note that when I asked GPT-5.4 Thinking to review Claude's implementation it picked holes in it and said the code \"is a simplified, Timsort-inspired adaptive mergesort\".)\n\nI don't like the dark color scheme on the buttons, do better\nAlso add a \"run all\" button which shows smaller animated charts for every algorithm at once in a grid and runs them all at the same time\n\nIt came up with a color scheme I liked better, \"do better\" is a fun prompt, and now the \"Run all\" button produces this effect:",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064cdd15c53e62",
+      "title": "Mojo's not (yet) Python",
+      "link": "http://notes.eatonphil.com/2026-03-12-mojos-not-yet-python.html",
+      "published": 1773273600,
+      "feedId": "feed/61",
+      "feedTitle": "Notes on software development",
+      "summary": "Feedback\n\t  As always,\n\t      please email\n\t      or tweet me\n\t      with questions, corrections, or ideas!",
       "contentSource": "readability"
     }
   ],

@@ -1,6 +1,6 @@
 {
   "date": "2026-03-13",
-  "summarizedAt": "2026-03-13T00:26:52.908Z",
+  "summarizedAt": "2026-03-13T04:36:34.533Z",
   "model": "zhipu:glm-4.7-flash",
   "summaries": [
     {
@@ -106,6 +106,21 @@
         "可视化",
         "教程",
         "Python"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064cdd15c53e62",
+      "title": "Mojo's not (yet) Python",
+      "link": "http://notes.eatonphil.com/2026-03-12-mojos-not-yet-python.html",
+      "feedTitle": "Notes on software development",
+      "published": 1773273600,
+      "summary": "本文讨论了 Mojo 语言目前尚未完全兼容 Python 的事实，并强调项目的开放性。作者在文中呼吁读者通过电子邮件或推特提供反馈、更正或建议，以促进项目的改进与发展。",
+      "tags": [
+        "Mojo",
+        "Python",
+        "编程语言",
+        "反馈",
+        "软件开发"
       ]
     }
   ]
