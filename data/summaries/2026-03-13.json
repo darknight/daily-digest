@@ -1,0 +1,112 @@
+{
+  "date": "2026-03-13",
+  "summarizedAt": "2026-03-13T00:26:52.908Z",
+  "model": "zhipu:glm-4.7-flash",
+  "summaries": [
+    {
+      "id": "tag:google.com,2005:reader/item/00064cdb78c32402",
+      "title": "MALUS - Clean Room as a Service",
+      "link": "https://simonwillison.net/2026/Mar/12/malus/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773346135,
+      "summary": "这是一篇关于 MALUS 服务的讽刺文章。该服务声称利用专有 AI 机器人从头重新创建开源项目，生成无版权归属、无 copyleft 的“合法独特”代码，以此规避开源许可证义务。作者确认这显然是一个玩笑。",
+      "tags": [
+        "讽刺",
+        "开源许可",
+        "版权",
+        "AI",
+        "软件工程"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064cdb78c32401",
+      "title": "Coding After Coders: The End of Computer Programming as We Know It",
+      "link": "https://simonwillison.net/2026/Mar/12/coding-after-coders/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773343424,
+      "summary": "本文引用纽约时报文章，探讨 AI 辅助开发对编程的影响。开发者乐观认为代码可测试，能约束 AI 幻觉。尽管有匿名苹果工程师担忧手工编码乐趣丧失，但整体态度积极，反映了行业对技术变革的适应与焦虑。",
+      "tags": [
+        "AI编程",
+        "软件开发",
+        "行业趋势",
+        "人工智能",
+        "开发工具"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064cd6ff4b52a9",
+      "title": "Quoting Les Orchard",
+      "link": "https://simonwillison.net/2026/Mar/12/les-orchard/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773332887,
+      "summary": "引用 Les Orchard 的观点，AI 辅助编程正在暴露开发者群体内部的分歧。过去手工与快速实现者混同，过程难辨。现在 AI 带来分岔路口，促使开发者选择机器编写或手工打造，从而显露了各自的底层动机。",
+      "tags": [
+        "AI编程",
+        "开发者",
+        "技术分歧",
+        "编程哲学",
+        "工程文化"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064cdafec42d5c",
+      "title": "Announcing Cloudflare Account Abuse Protection: prevent fraudulent attacks from bots and humans",
+      "link": "https://blog.cloudflare.com/account-abuse-protection/",
+      "feedTitle": "The Cloudflare Blog",
+      "published": 1773291600,
+      "summary": "Cloudflare 推出账户滥用防护功能，旨在阻止机器人与人类合谋的欺诈。该套件集成了泄露凭证检查、邮箱验证及加密哈希 ID 等工具，帮助网站识别可疑身份并阻止滥用，目前处于早期访问阶段。",
+      "tags": [
+        "Cloudflare",
+        "网络安全",
+        "防欺诈",
+        "机器人防护",
+        "账户安全"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064cd23dcbae64",
+      "title": "零安装的\"云养虾\"：ArkClaw 使用指南",
+      "link": "http://www.ruanyifeng.com/blog/2026/03/arkclaw.html",
+      "feedTitle": "阮一峰的网络日志",
+      "published": 1773302466,
+      "summary": "本文介绍 ArkClaw，这是字节跳动 Coding Plan 套餐提供的零安装“云养虾”服务。用户无需本地配置，即可在云端使用 OpenClaw。该服务与飞书等生态深度整合，支持自然语言指令及 Skill 扩展，极大简化了自动化流程。",
+      "tags": [
+        "字节跳动",
+        "云计算",
+        "自动化",
+        "AI工具",
+        "ArkClaw"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064ccf66d38388",
+      "title": "中美洲行记（六）：罗阿坦岛",
+      "link": "https://byvoid.com/zhs/blog/central-america-6/",
+      "feedTitle": "Beyond the Void",
+      "published": 1773293940,
+      "summary": "作者记录了在洪都拉斯罗阿坦岛的旅行。尽管天气恶劣，仍见识了基础设施落后的村庄和面向游客的度假别墅。因道路泥泞未能造访 Prospera 自由城市，并描述了简陋住宿及当地持枪安保的景象。",
+      "tags": [
+        "旅行",
+        "中美洲",
+        "游记",
+        "罗阿坦岛",
+        "洪都拉斯"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064ccea0f07347",
+      "title": "Sorting algorithms",
+      "link": "https://simonwillison.net/2026/Mar/11/sorting-algorithms/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773269886,
+      "summary": "作者使用 Claude Artifacts 创建了排序算法的交互式动画演示，涵盖冒泡排序、快速排序及 Python 的 TimSort。开发了“运行全部”功能，可同时展示所有算法过程，直观展示排序逻辑。",
+      "tags": [
+        "算法",
+        "排序",
+        "可视化",
+        "教程",
+        "Python"
+      ]
+    }
+  ]
+}
