@@ -1,6 +1,6 @@
 {
   "date": "2026-03-14",
-  "summarizedAt": "2026-03-14T00:24:40.302Z",
+  "summarizedAt": "2026-03-14T04:36:16.010Z",
   "model": "zhipu:glm-4.7-flash",
   "summaries": [
     {
@@ -120,6 +120,36 @@
         "测试",
         "Next.js",
         "软件开发"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064cf43f24d025",
+      "title": "How to use the Qwen 3.5 LLMs to OCR documents",
+      "link": "https://martinalderson.com/posts/how-to-use-qwen-3-5-to-ocr-documents/?utm_source=rss&utm_medium=rss&utm_campaign=feed",
+      "feedTitle": "Martin Alderson",
+      "published": 1773360000,
+      "summary": "文章探讨了利用开源模型Qwen 3.5替代昂贵的Gemini进行文档OCR的方案。作者分析了Qwen 3.5多模态模型的性能，推荐9B版本为最佳选择。同时，详细介绍了使用PyMuPDF提取PDF页面以及通过本地或云端服务运行模型的实操步骤。",
+      "tags": [
+        "Qwen 3.5",
+        "OCR",
+        "开源模型",
+        "文档处理",
+        "大语言模型"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064cf20a032a2e",
+      "title": "Big tech engineers need big egos",
+      "link": "https://seangoedecke.com/big-tech-needs-big-egos/",
+      "feedTitle": "seangoedecke.com RSS feed",
+      "published": 1773446400,
+      "summary": "文章反驳了“工程师不应有大自负”的观点，认为在大型科技公司生存，自信是必不可少的。作者指出，面对庞大复杂的代码库，工程师需要强大的自信来克服挫败感并解决问题；同时，在模棱两可的技术决策中，也需要自信表明立场，而非推卸责任。",
+      "tags": [
+        "工程师",
+        "自信",
+        "软件工程",
+        "职场文化",
+        "大型科技公司"
       ]
     }
   ]
