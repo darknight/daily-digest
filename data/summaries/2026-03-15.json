@@ -1,0 +1,49 @@
+{
+  "date": "2026-03-15",
+  "summarizedAt": "2026-03-15T00:29:18.960Z",
+  "model": "zhipu:glm-4.7-flash",
+  "summaries": [
+    {
+      "id": "tag:google.com,2005:reader/item/00064d02082cf682",
+      "title": "Quoting Jannis Leidel",
+      "link": "https://simonwillison.net/2026/Mar/14/jannis-leidel/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773513685,
+      "summary": "Jazzband 宣布关闭，原因是 GitHub 上泛滥的 AI 生成垃圾代码导致开源协作模式失效。随着 90% 的 PR 不符合标准，且 GitHub 采取禁用 PR 等极端措施，开放权限的协作方式已无法保障项目安全。",
+      "tags": [
+        "open-source",
+        "ai",
+        "github",
+        "security"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d02082cf681",
+      "title": "My fireside chat about agentic engineering at the Pragmatic Summit",
+      "link": "https://simonwillison.net/2026/Mar/14/pragmatic-summit/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773512378,
+      "summary": "Simon Willison 分享了关于 AI 采用阶段的炉边谈话。他认为程序员已进入代理编写代码多于人类的阶段，甚至出现了完全不阅读代码的激进用法。他建议通过“红绿重构”等提示词引导代理进行测试驱动开发，以提高代码质量。",
+      "tags": [
+        "ai",
+        "programming",
+        "tdd",
+        "coding"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064cf4db36a4c1",
+      "title": "一个集记账、基金、股票于一体的APP",
+      "link": "https://blog.ops-coffee.com/s/ai-coding-integrated-finance-app.html",
+      "feedTitle": "运维咖啡吧",
+      "published": 1773457921,
+      "summary": "作者利用 AI 编程技术打造了一款集记账、基金、股票于一体的财务管理 APP。该应用支持自定义分类、实时估值及多平台运行，实现了资产总览。作者认为 AI 简化了开发流程，让编程像使用办公软件一样成为人人可掌握的技能。",
+      "tags": [
+        "ai",
+        "finance",
+        "flutter",
+        "productivity"
+      ]
+    }
+  ]
+}
