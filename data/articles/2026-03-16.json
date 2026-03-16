@@ -1,6 +1,6 @@
 {
   "date": "2026-03-16",
-  "fetchedAt": "2026-03-16T00:28:57.112Z",
+  "fetchedAt": "2026-03-16T04:56:00.040Z",
   "articles": [
     {
       "id": "tag:google.com,2005:reader/item/00064d183886940d",
@@ -50,6 +50,16 @@
       "feedId": "feed/17",
       "feedTitle": "Sebastian Raschka， PhD",
       "summary": "I put together a new LLM Architecture Gallery that collects the architecture figures from The Big LLM Architecture Comparison and A Dream of Spring for Open-Weight LLMs in one place.\n\nThe goal is to make it easier to quickly browse recent open-weight LLM architectures without jumping back and forth between article sections.\n\nThe gallery includes:\n\n\n  clickable high-resolution architecture figures\n  compact fact sheets for each model\n  dates, config.json links, tech-report links, and from-scratch implementation links where available\n  short concept explainers for things like GQA, MLA, SWA, QK-Norm, NoPE, Gated DeltaNet, and related ideas\n\n\nYou can find it here:\n\n\nOpen the LLM Architecture Gallery\n\nIf you spot an incorrect fact sheet, mislabeled architecture, or broken link, there is also an issue link at the top of the gallery page.",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d1c9c9bd042",
+      "title": "What is agentic engineering?",
+      "link": "https://simonwillison.net/guides/agentic-engineering-patterns/what-is-agentic-engineering/#atom-everything",
+      "published": 1773614517,
+      "feedId": "feed/18",
+      "feedTitle": "Simon Willison's Weblog",
+      "summary": "I use the term agentic engineering to describe the practice of developing software with the assistance of coding agents.\nWhat are coding agents? They're agents that can both write and execute code. Popular examples include Claude Code, OpenAI Codex, and Gemini CLI.\nWhat's an agent? Clearly defining that term is a challenge that has frustrated AI researchers since at least the 1990s but the definition I've come to accept, at least in the field of Large Language Models (LLMs) like GPT-5 and Gemini and Claude, is this one:\nAgents run tools in a loop to achieve a goal\n\nYou prompt the coding agent to define a goal. The agent then generates and executes code in a loop until that goal has been met.\nCode execution is the defining capability that makes agentic engineering possible. Without the ability to directly run the code, anything output by an LLM is of limited value. With code execution, these agents can start iterating towards software that demonstrably works.\nAgentic engineering\nNow that we have software that can write working code, what is there left for us humans to do?\nThe answer is so much stuff.\nWriting code has never been the sole activity of a software engineer. The craft has always been figuring out what code to write. Any given software problem has dozens of potential solutions, each with their own tradeoffs. Our job is to navigate those options and find the ones that are the best fit for our unique set of circumstances and requirements.\nGetting great results out of coding agents is a deep subject in its own right, especially now as the field continues to evolve at a bewildering rate.\nWe need to provide our coding agents with the tools they need to solve our problems, specify those problems in the right level of detail, and verify and iterate on the results until we are confident they address our problems in a robust and credible way.\nLLMs don't learn from their past mistakes, but coding agents can, provided we deliberately update our instructions and tool harnesses to account for what we learn along the way.\nUsed effectively, coding agents can help us be much more ambitious with the projects we take on. Agentic engineering should help us produce more, better quality code that solves more impactful problems.\nAbout this guide\nJust like the field it attempts to cover, Agentic Engineering Patterns is very much a work in progress. My goal is to identify and describe patterns for working with these tools that demonstrably get results, and that are unlikely to become outdated as the tools advance.\nI'll continue adding more chapters as new techniques emerge. No chapter should be considered finished. I'll be updating existing chapters as our understanding of these patterns evolves.",
       "contentSource": "readability"
     }
   ],

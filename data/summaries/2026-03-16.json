@@ -1,6 +1,6 @@
 {
   "date": "2026-03-16",
-  "summarizedAt": "2026-03-16T00:29:39.140Z",
+  "summarizedAt": "2026-03-16T04:56:19.506Z",
   "model": "zhipu:glm-4.7-flash",
   "summaries": [
     {
@@ -76,6 +76,21 @@
         "深度学习",
         "人工智能",
         "开源模型"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d1c9c9bd042",
+      "title": "What is agentic engineering?",
+      "link": "https://simonwillison.net/guides/agentic-engineering-patterns/what-is-agentic-engineering/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773614517,
+      "summary": "代理工程是指在编码智能体协助下开发软件的实践。智能体通过循环运行工具实现目标，而人类则负责定义问题、选择最佳方案及验证迭代。这种协作模式不仅能帮助工程师产出更多高质量代码，还能应对更具挑战性的项目。",
+      "tags": [
+        "代理工程",
+        "AI编程",
+        "编码代理",
+        "软件开发",
+        "智能体"
       ]
     }
   ]
