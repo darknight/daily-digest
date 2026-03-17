@@ -1,6 +1,6 @@
 {
   "date": "2026-03-17",
-  "summarizedAt": "2026-03-17T00:26:40.915Z",
+  "summarizedAt": "2026-03-17T04:40:56.934Z",
   "model": "zhipu:glm-4.7-flash",
   "summaries": [
     {
@@ -120,6 +120,127 @@
         "版本控制",
         "AI Agent",
         "Git"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d2786a73c8d",
+      "title": "从 Git 转向 jj：几个月后的体感",
+      "link": "https://ai.onev.cat/articles/zh/2026-03-17-jj-agent-era/",
+      "feedTitle": "上了AI的贼船",
+      "published": 1773705600,
+      "summary": "作者分享了从 Git 切换到版本控制工具 jj 的几个月体验，认为其心智模型更贴合现代开发节奏，特别是在回溯和整理历史方面表现更佳。文章探讨了在 Agent 时代重新评估版本管理的必要性。",
+      "tags": [
+        "jj",
+        "Git",
+        "版本控制",
+        "开发工具",
+        "Agent Era"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d2786a73c8c",
+      "title": "JEP 526 - Stable Values Become Lazy Constants",
+      "link": "https://softwaremill.com/jep-526-stable-values-become-lazy-constants/",
+      "feedTitle": "SoftwareMill",
+      "published": 1773676260,
+      "summary": "Java 25/26 中的新特性 JEP 526 将 Stable Values 重命名为 Lazy Constants，旨在提供延迟加载的不可变容器，解决传统 final 字段必须急切初始化的性能问题。文章详细介绍了 LazyConstant 的机制、应用场景以及 API 变更细节。",
+      "tags": [
+        "Java",
+        "JEP 526",
+        "Lazy Constants",
+        "性能优化",
+        "编程语言"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d2786a73c8a",
+      "title": "Why Codex Security Doesn’t Include a SAST Report",
+      "link": "https://openai.com/index/why-codex-security-doesnt-include-sast",
+      "feedTitle": "OpenAI News",
+      "published": 1773619200,
+      "summary": "本文深入探讨了 OpenAI Codex Security 不依赖传统静态应用程序安全测试（SAST）的原因，而是采用 AI 驱动的约束推理和验证技术，旨在以更少的误报发现真实漏洞，从而提升安全检测效率。",
+      "tags": [
+        "Codex Security",
+        "SAST",
+        "漏洞检测",
+        "AI 安全",
+        "OpenAI"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d22c9dee7ef",
+      "title": "50 岁的苹果和 51 岁的我 - 肘子的 Swift 周报 #127",
+      "link": "https://fatbobman.com/zh/weekly/issue-127/",
+      "feedTitle": "肘子的 Swift 记事本 ｜ Fatbobman's Blog",
+      "published": 1773669600,
+      "summary": "本文是关于 Apple 50 岁生日的感想，同时汇总了 Swift 开发相关的技术内容，包括对 Core Data 在 2026 年现状的思考、应用安全策略、iOS 订阅配置的自动化实践、Swift Protocol 检测方法以及从 GCD 迁移到 Swift Concurrency 的注意事项。",
+      "tags": [
+        "Swift",
+        "Apple",
+        "Core Data",
+        "iOS",
+        "安全",
+        "并发"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d21ac017989",
+      "title": "重塑站外体验：大众点评 M 站基于 Qwik.js 的重构实践",
+      "link": "https://tech.meituan.com/2026/03/13/qwik-practice-in-dianping.html",
+      "feedTitle": "美团技术团队",
+      "published": 1773360000,
+      "summary": "大众点评 M 站基于 Qwik.js 进行重构，旨在解决旧技术栈的性能瓶颈，提升弱网和低端设备下的首屏加载速度与转化率。文章详细阐述了选择 Qwik 的原因，包括其独特的 Resumability（可恢复性）技术以减少水合开销。",
+      "tags": [
+        "Qwik",
+        "大众点评",
+        "性能优化",
+        "SSR",
+        "Web 开发"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d1f503df169",
+      "title": "智能体工程的 8 个等级",
+      "link": "https://baoyu.io/translations/2026-03-11/levels-of-agentic-engineering",
+      "feedTitle": "宝玉的分享",
+      "published": 1773619200,
+      "summary": "本文提出了 AI 编程智能体工程的 8 个等级进阶路径。从基础的 Tab 补全到高级的上下文工程、复合工程（沉淀经验）以及 MCP 技能接入，文章详细阐述了如何通过系统化的方法提升智能体的协作效率和产出质量。",
+      "tags": [
+        "AI",
+        "智能体工程",
+        "上下文工程",
+        "MCP",
+        "编程辅助"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d1f503df168",
+      "title": "The Others",
+      "link": "https://dark.ronacher.eu/2026/3/14/the-others/",
+      "feedTitle": "Dark Thoughts",
+      "published": 1773446400,
+      "summary": "文章评论了近期地区冲突的基调，指出战争在道德和情感上被随意对待，通过引用政客言论对比战争的现实残酷性。作者试图探讨这种“距离感”和“轻松感”如何深刻影响公众对战争的认知。",
+      "tags": [
+        "战争",
+        "伊朗",
+        "以色列",
+        "基调",
+        "国际政治"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d2d8ab127b0",
+      "title": "LangChain Announces Enterprise Agentic AI Platform Built with NVIDIA",
+      "link": "https://blog.langchain.com/nvidia-enterprise/",
+      "feedTitle": "LangChain Blog",
+      "published": 1773696688,
+      "summary": "LangChain 宣布与 NVIDIA 合作推出企业级智能体 AI 平台，结合了 LangChain 的框架与 NVIDIA 的 Agent Toolkit 和 Nemotron 模型。该平台旨在帮助开发者构建、部署和监控生产级智能体，利用 NVIDIA 的优化技术提升性能。",
+      "tags": [
+        "LangChain",
+        "NVIDIA",
+        "智能体",
+        "AI 平台",
+        "企业级"
       ]
     }
   ]
