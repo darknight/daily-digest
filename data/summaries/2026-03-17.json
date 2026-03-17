@@ -1,0 +1,126 @@
+{
+  "date": "2026-03-17",
+  "summarizedAt": "2026-03-17T00:26:40.915Z",
+  "model": "zhipu:glm-4.7-flash",
+  "summaries": [
+    {
+      "id": "tag:google.com,2005:reader/item/00064d2b288d48fa",
+      "title": "Quoting Guilherme Rambo",
+      "link": "https://simonwillison.net/2026/Mar/16/guilherme-rambo/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773693253,
+      "summary": "MacBook Neo 的摄像头指示灯运行在芯片的“安全隔离区”中，与操作系统内核完全分离。这意味着即便发生内核级漏洞，黑客也无法在不点亮屏幕指示灯的情况下开启摄像头，为用户提供了极高的隐私安全保障。",
+      "tags": [
+        "MacBook",
+        "隐私安全",
+        "指示灯",
+        "芯片技术"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d2b288d48f9",
+      "title": "Coding agents for data analysis",
+      "link": "https://simonwillison.net/2026/Mar/16/coding-agents-for-data-analysis/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773691952,
+      "summary": "Simon Willison 分享了关于数据分析编码代理的资料，展示了如何使用 Claude Code 和 OpenAI Codex 探索、清理和可视化数据。课程重点演示了利用 Claude Code 直接在静态文件夹中生成交互式可视化图表的过程。",
+      "tags": [
+        "数据分析",
+        "编码代理",
+        "数据可视化",
+        "Claude",
+        "Python"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d2786a73c8b",
+      "title": "How coding agents work",
+      "link": "https://simonwillison.net/guides/agentic-engineering-patterns/how-coding-agents-work/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773669701,
+      "summary": "本文深入解析了编码代理的工作原理。编码代理本质是对大型语言模型（LLM）的扩展，通过提示词和工具赋予其额外能力。文章详细介绍了 LLM 如何处理 Token、Prompt 和 Chat Templates，以及如何通过重放历史对话来维持会话状态。",
+      "tags": [
+        "编码代理",
+        "LLM",
+        "大语言模型",
+        "工作原理",
+        "提示词工程"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d2abe50370e",
+      "title": "Standing up for the open Internet: why we appealed Italy’s \"Piracy Shield\" fine",
+      "link": "https://blog.cloudflare.com/standing-up-for-the-open-internet/",
+      "feedTitle": "The Cloudflare Blog",
+      "published": 1773687600,
+      "summary": "Cloudflare 正在挑战意大利高达 1400 万欧元的“盗版盾”罚款，并继续质疑该法律的有效性。“盗版盾”是一个缺乏司法监督、透明度和正当程序的“黑盒”系统，允许私营公司要求服务提供商在 30 分钟内封禁网站。Cloudflare 认为这牺牲了用户权利，威胁了开放互联网架构。",
+      "tags": [
+        "Cloudflare",
+        "互联网自由",
+        "法律诉讼",
+        "隐私",
+        "开源"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d2abe50370d",
+      "title": "ONCE (Again)",
+      "link": "https://world.hey.com/dhh/once-again-3e99f755",
+      "feedTitle": "David Heinemeier Hansson",
+      "published": 1773684181,
+      "summary": "DHH 介绍了“ONCE”项目的迭代。最初的一次性付费模式失败后，他们开源了 Campfire 等应用。现在 ONCE 被重新定义为一个统一的应用服务器，允许用户在单台机器（甚至笔记本）上轻松运行开源应用和 AI 代理构建的工具，并提供零停机升级和终端监控功能。",
+      "tags": [
+        "DHH",
+        "ONCE",
+        "自托管",
+        "应用服务器",
+        "开源"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d298995decd",
+      "title": "Introducing deploy cli",
+      "link": "https://blog.langchain.com/introducing-deploy-cli/",
+      "feedTitle": "LangChain Blog",
+      "published": 1773681621,
+      "summary": "LangChain 推出了 `deploy cli` 工具，简化了从命令行部署和管理代理的过程。主要命令 `langgraph deploy` 可一步部署代理到 LangSmith，自动构建 Docker 镜像并配置 Postgres 和 Redis 等基础设施。该工具与 CI/CD 流程无缝集成，降低了生产环境部署的门槛。",
+      "tags": [
+        "LangChain",
+        "部署",
+        "CLI",
+        "代理",
+        "Docker"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d293343c19e",
+      "title": "Introducing Akka Specify",
+      "link": "https://akka.io/blog/introducing-akka-specify",
+      "feedTitle": "AKKA Blogs",
+      "published": 1773674873,
+      "summary": "Akka 发布了 Akka Specify 功能，旨在简化基于规格驱动开发（SDD）的代理式 AI 系统构建。用户无需编码，即可通过 Claude Code 等助手基于自然语言描述的规格文件来生成、测试和部署应用。这强调了规格文档在开发流程中的核心地位。",
+      "tags": [
+        "Akka",
+        "规格驱动开发",
+        "AI 代理",
+        "Claude Code",
+        "自动化"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d27e1eaf934",
+      "title": "用好你的 jj - 重新思考 Agent 时代的版本控制",
+      "link": "https://onevcat.com/2026/03/jj-for-agent-era/",
+      "feedTitle": "OneV's Den",
+      "published": 1773671400,
+      "summary": "作者认为 Git 的设计假设（如暂存区、rebase）不适合 AI agent 的工作流，因为 agent 更倾向于批量生成代码。推荐使用 jj (Jujutsu) 作为本地版本控制工具。jj 使用“变更”概念，避免了 Git 的复杂状态管理，支持更灵活的修改历史和分支操作，更适合人机协作。",
+      "tags": [
+        "jj",
+        "Jujutsu",
+        "版本控制",
+        "AI Agent",
+        "Git"
+      ]
+    }
+  ]
+}
