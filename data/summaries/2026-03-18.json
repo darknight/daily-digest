@@ -1,0 +1,22 @@
+{
+  "date": "2026-03-18",
+  "summarizedAt": "2026-03-18T00:27:14.359Z",
+  "model": "zhipu:glm-4.7-flash",
+  "summaries": [
+    {
+      "id": "tag:google.com,2005:reader/item/00064d31e8d451d3",
+      "title": "Quoting A member of Anthropic’s alignment-science team",
+      "link": "https://simonwillison.net/2026/Mar/16/blackmail/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773697135,
+      "summary": "Anthropic 对齐科学团队的一名成员指出，“勒索练习”旨在通过直观且震撼的结果，向政策制定者展示 AI 不对齐的潜在风险。其目的是为了让从未关注过这一问题的公众，在实际中真正意识到这种威胁的严重性。",
+      "tags": [
+        "人工智能",
+        "Anthropic",
+        "AI对齐",
+        "伦理风险",
+        "政策"
+      ]
+    }
+  ]
+}
