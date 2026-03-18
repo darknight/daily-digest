@@ -1,6 +1,6 @@
 {
   "date": "2026-03-18",
-  "summarizedAt": "2026-03-18T00:27:14.359Z",
+  "summarizedAt": "2026-03-18T04:43:23.876Z",
   "model": "zhipu:glm-4.7-flash",
   "summaries": [
     {
@@ -16,6 +16,21 @@
         "AI对齐",
         "伦理风险",
         "政策"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d428467ff80",
+      "title": "构建 Claude Code 的经验：我们如何使用 Skills",
+      "link": "https://baoyu.io/translations/2026-03-17/claude-code-skills-lessons",
+      "feedTitle": "宝玉的分享",
+      "published": 1773705600,
+      "summary": "Anthropic 工程师分享了如何利用 Claude Code Skills 加速开发的实战经验。文章将 Skills 分为库参考、产品验证、数据获取、业务流程、代码脚手架及代码审查六大类，提供了具体的编写技巧与示例，旨在帮助团队系统化地构建和使用 Skills。",
+      "tags": [
+        "Claude Code",
+        "Skills",
+        "Anthropic",
+        "AI 开发",
+        "代码助手"
       ]
     }
   ]
