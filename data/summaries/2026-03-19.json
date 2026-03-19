@@ -1,6 +1,6 @@
 {
   "date": "2026-03-19",
-  "summarizedAt": "2026-03-19T00:31:34.084Z",
+  "summarizedAt": "2026-03-19T04:42:03.077Z",
   "model": "zhipu:glm-4.7-flash",
   "summaries": [
     {
@@ -43,6 +43,21 @@
         "Windows",
         "AI 代理",
         "Fedora"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d58dddd5e92",
+      "title": "Pin your traffic to specific regions",
+      "link": "https://ngrok.com/blog/2026-03-18-region-pinning",
+      "feedTitle": "[ngrok news]",
+      "published": 1773792000,
+      "summary": "本文介绍了ngrok的一项新功能，允许用户将网络流量固定到特定的地理位置区域。这一功能对于需要遵守地区法规或优化网络延迟的开发者至关重要，能有效解决网络访问限制问题，提升使用体验。",
+      "tags": [
+        "ngrok",
+        "开发工具",
+        "网络流量",
+        "地理位置限制",
+        "网络开发"
       ]
     }
   ]
