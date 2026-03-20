@@ -1,0 +1,37 @@
+{
+  "date": "2026-03-20",
+  "summarizedAt": "2026-03-20T00:27:17.912Z",
+  "model": "zhipu:glm-4.7-flash",
+  "summaries": [
+    {
+      "id": "tag:google.com,2005:reader/item/00064d5c3825fd6a",
+      "title": "读《明朝那些事儿》",
+      "link": "https://manateelazycat.github.io/2026/03/18/reading-ming-chao/",
+      "feedTitle": "Andy Stewart",
+      "published": 1773763200,
+      "summary": "作者利用 AI 编程构建阅读软件，借此读完《明朝那些事儿》。书中生动的笔触让历史变得引人入胜。作者重点分析了朱元璋的勤勉、王阳明灵活的心学实践以及徐阶的理想与实干结合。通过阅读历史，作者获得了全局观和对人性的深刻理解，认为成功的关键在于按照自己的方式度过人生。",
+      "tags": [
+        "明朝那些事儿",
+        "历史",
+        "阅读感悟",
+        "人性",
+        "AI编程"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d5988798685",
+      "title": "被美国遣返、禁止入境 5 年，他在温哥华的卧室里做出了日处理 400 万工作流的 AI 平台",
+      "link": "https://baoyu.io/blog/gumloop-max-interview",
+      "feedTitle": "宝玉的分享",
+      "published": 1773792000,
+      "summary": "Gumloop CEO Max 在被美国遣返后被迫创业，公司获 5000 万美元融资。他批评了“50 个 AI Agent 自动运营公司”的营销泡沫，认为这是贩卖希望的骗局。他主张 AI 应增强而非替代人类，并强调 21-23 岁是创业的黄金窗口。Max 通过快速试错和主动寻找失败理由来验证想法，最终打造出可靠的 AI 平台。",
+      "tags": [
+        "AI创业",
+        "Gumloop",
+        "遣返",
+        "营销泡沫",
+        "AI应用"
+      ]
+    }
+  ]
+}
