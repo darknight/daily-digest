@@ -1,6 +1,6 @@
 {
   "date": "2026-03-20",
-  "summarizedAt": "2026-03-20T00:27:17.912Z",
+  "summarizedAt": "2026-03-20T04:37:30.500Z",
   "model": "zhipu:glm-4.7-flash",
   "summaries": [
     {
@@ -31,6 +31,125 @@
         "遣返",
         "营销泡沫",
         "AI应用"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d691e0769b8",
+      "title": "Crush + Docker MCPGet MCPs on-the-fly in Crush with Docker MCP.By Andrey Ne…",
+      "link": "https://charm.land/blog/crush-and-docker-mcp/",
+      "feedTitle": "The Charm Blog",
+      "published": 1773878400,
+      "summary": "Crush 与 Docker 原生集成了 Docker MCP Catalog，开发者只需在终端运行特定命令即可启用该功能。该功能支持在对话中按需加载相关 MCP，用于管理数据库、云服务、邮件发送及 GitHub 等任务，极大地简化了配置流程，提高了开发效率。",
+      "tags": [
+        "Docker",
+        "MCP",
+        "Crush",
+        "开发工具",
+        "自动化"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d670f7800b8",
+      "title": "Introducing LangSmith Fleet",
+      "link": "https://blog.langchain.com/introducing-langsmith-fleet/",
+      "feedTitle": "LangChain Blog",
+      "published": 1773938982,
+      "summary": "LangSmith Fleet 是一个企业级工作区，旨在帮助团队创建、使用和管理智能体。该工具支持通过自然语言提示词快速生成智能体，并提供了完善的权限管理、身份认证和共享机制，确保团队可以安全地部署、审计和协作使用智能体。",
+      "tags": [
+        "LangChain",
+        "LangSmith",
+        "智能体",
+        "企业级",
+        "权限管理"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d663af8a43e",
+      "title": "Developer Spotlight: Somtochi Onyekwere from Fly.io",
+      "link": "http://notes.eatonphil.com/2026-03-19-developer-spotlight-somtochi-onyekwere.html",
+      "feedTitle": "Notes on software development",
+      "published": 1773878400,
+      "summary": "本文是对 Fly.io 开发者 Somtochi Onyekwere 的开发者专访，主要介绍其在 Fly.io 的工作经历与贡献。",
+      "tags": [
+        "Fly.io",
+        "开发者专访",
+        "采访",
+        "后端开发"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d657c31bc29",
+      "title": "How we monitor internal coding agents for misalignment",
+      "link": "https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment",
+      "feedTitle": "OpenAI News",
+      "published": 1773914400,
+      "summary": "OpenAI 利用思维链监控技术来研究内部编码智能体的错位问题。通过分析实际部署情况，团队旨在检测潜在风险并加强 AI 安全保障措施，以确保人工智能系统的可靠性和安全性。",
+      "tags": [
+        "OpenAI",
+        "AI安全",
+        "监控",
+        "代码智能体",
+        "错位"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d614d7bb8ce",
+      "title": "OpenAI to acquire Astral",
+      "link": "https://openai.com/index/openai-to-acquire-astral",
+      "feedTitle": "OpenAI News",
+      "published": 1773878400,
+      "summary": "OpenAI 宣布收购 Astral 公司，旨在加速 Codex 的发展，从而为下一代 Python 开发者工具提供动力，提升 AI 在软件开发流程中的能力。",
+      "tags": [
+        "OpenAI",
+        "收购",
+        "Astral",
+        "Python",
+        "Codex"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d6505b9ee52",
+      "title": "Thoughts on OpenAI acquiring Astral and uv/ruff/ty",
+      "link": "https://simonwillison.net/2026/Mar/19/openai-acquiring-astral/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773938715,
+      "summary": "Simon Willison 评论了 OpenAI 收购 Astral 的新闻。Astral 拥有 uv、ruff 和 ty 等热门 Python 工具。作者认为收购重点在于人才和 uv 产品，并推测这将加强 Python 生态系统，同时 OpenAI 承诺继续支持这些开源项目。",
+      "tags": [
+        "OpenAI",
+        "Astral",
+        "Python",
+        "开源",
+        "收购"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d5bc943fbbe",
+      "title": "Autoresearching Apple's \"LLM in a Flash\" to run Qwen 397B locally",
+      "link": "https://simonwillison.net/2026/Mar/18/llm-in-a-flash/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773878206,
+      "summary": "本文介绍了利用 Apple 的“LLM in a Flash”技术，在 MacBook Pro M3 Max 上成功运行 Qwen 3.5-397B-A17B 模型。通过流式传输专家权重，该模型在 48GB 内存下实现了每秒 5.5 个 token 的运行速度，展示了高效推理的巨大潜力。",
+      "tags": [
+        "Apple",
+        "机器学习",
+        "本地推理",
+        "Qwen",
+        "量化"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d614d7bb8cd",
+      "title": "最佳代理实践 (2026-3-19)",
+      "link": "https://manateelazycat.github.io/2026/03/19/best-proxy/",
+      "feedTitle": "Andy Stewart",
+      "published": 1773849600,
+      "summary": "本文是一份详细的 Clash 代理配置指南，涵盖了机场订阅、节点选择、混合端口及流量嗅探等设置，旨在帮助用户搭建稳定高效的代理环境。",
+      "tags": [
+        "Clash",
+        "代理配置",
+        "网络优化",
+        "翻墙",
+        "VPN"
       ]
     }
   ]
