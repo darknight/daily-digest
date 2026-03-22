@@ -1,0 +1,97 @@
+{
+  "date": "2026-03-22",
+  "summarizedAt": "2026-03-22T00:27:29.674Z",
+  "model": "zhipu:glm-4.7-flash",
+  "summaries": [
+    {
+      "id": "tag:google.com,2005:reader/item/00064d8c4d0c27f1",
+      "title": "怎么开发小龙虾插件？",
+      "link": "https://manateelazycat.github.io/2026/03/21/openclaw-dev/",
+      "feedTitle": "Andy Stewart",
+      "published": 1774022400,
+      "summary": "本文介绍了在AI时代开发“小龙虾”软件的新方法。核心在于利用AI阅读代码并理解需求，由人类进行决策和测试。遇到Bug时，AI负责前端，小龙虾负责后端调试，这种协作模式能极大提升开发效率。",
+      "tags": [
+        "AI",
+        "开发",
+        "效率",
+        "小龙虾",
+        "OpenClaw"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d8c4d0c27f0",
+      "title": "怎么让OpenClaw WebChat渲染图片",
+      "link": "https://manateelazycat.github.io/2026/03/21/openclaw-picture/",
+      "feedTitle": "Andy Stewart",
+      "published": 1774022400,
+      "summary": "针对OpenClaw WebChat无法显示图片的问题，文章提供了一种无需修改核心代码的解决方案。通过启动文件系统的双向通讯服务，并利用自定义协议头在Markdown中发送图片链接，前端可拦截并渲染图片，实现了功能的灵活扩展。",
+      "tags": [
+        "OpenClaw",
+        "WebChat",
+        "图片渲染",
+        "软件扩展",
+        "开发技巧"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d87ba9c6ee6",
+      "title": "套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的\"套壳\"疑云",
+      "link": "http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html",
+      "feedTitle": "阮一峰的网络日志",
+      "published": 1774088351,
+      "summary": "Cursor 的 AI 模型 Composer 2 被证实是套壳自 Kimi K2.5，且通过第三方 Fireworks AI 获得授权。文章分析了 Cursor 拼命隐藏真相的原因，认为这是为了支撑其火箭式增长的估值，将自己包装成大模型公司。同时也肯定了国产大模型 Kimi 的技术实力。",
+      "tags": [
+        "Cursor",
+        "大模型",
+        "估值",
+        "AI工具",
+        "Kimi"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d87ba9c6ee5",
+      "title": "Some Things Just Take Time",
+      "link": "https://lucumr.pocoo.org/2026/3/20/some-things-just-take-time/",
+      "feedTitle": "Armin Ronacher's Thoughts and Writings",
+      "published": 1773964800,
+      "summary": "文章探讨了时间与耐心的价值，批评了当下追求极速迭代和消除摩擦的软件开发文化。作者认为，像合规、成熟度等需要时间积累的事物，其过程本身具有意义。真正的成功取决于在数年挑战中的坚持与韧性，而非单纯的速度。",
+      "tags": [
+        "软件开发",
+        "耐心",
+        "极速迭代",
+        "时间",
+        "生产力"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d873e9b3db0",
+      "title": "游记｜周末去了一趟苏州，找到了春天最舒服的打开方式",
+      "link": "https://blog.ops-coffee.com/r/city-china-jiangsu-suzhou-miduishan-wangshan.html",
+      "feedTitle": "运维咖啡吧",
+      "published": 1774089226,
+      "summary": "作者分享了2026年3月周末在苏州的游记。通过爬米堆山和旺山，体验太湖风光、观赏红嘴鸥，并探访永慧禅寺。文章记录了踏青赏花的惬意时光，展现了在山野之间寻找舒适生活方式的乐趣。",
+      "tags": [
+        "游记",
+        "苏州",
+        "春游",
+        "太湖",
+        "徒步"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d832d247eeb",
+      "title": "Turbo Pascal 3.02A, deconstructed",
+      "link": "https://simonwillison.net/2026/Mar/20/turbo-pascal/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1774051154,
+      "summary": "作者利用 Claude AI 分析了 1985 年的 Turbo Pascal 3.02A 可执行文件。通过反汇编和可视化，展示了这个仅有 39KB 的程序如何包含完整的文本编辑器和编译器。展示了 AI 在解读古老二进制代码方面的强大能力。",
+      "tags": [
+        "Turbo Pascal",
+        "AI分析",
+        "反编译",
+        "软件工程",
+        "二进制"
+      ]
+    }
+  ]
+}
