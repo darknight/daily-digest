@@ -1,0 +1,95 @@
+{
+  "date": "2026-03-23",
+  "summarizedAt": "2026-03-23T00:29:23.942Z",
+  "model": "zhipu:glm-4.7-flash",
+  "summaries": [
+    {
+      "id": "tag:google.com,2005:reader/item/00064da2f649b7aa",
+      "title": "This week in #Scala (Mar 23, 2026)",
+      "link": "https://thisweekinscala.substack.com/p/this-week-in-scala-mar-23-2026",
+      "feedTitle": "This Week In #Scala",
+      "published": 1774203967,
+      "summary": "本周Scala资讯汇总，涵盖Scala 3对Scoverage的支持增强、sbt插件迁移、PureLogic库及直接样式编程的介绍。文章还发布了针对编码智能体的Scala代码智能工具，列出了scala-cli的E2E设置，以及近期会议预告和版本发布（如cats-effect 3.7.0、sbt 1.12.6），并提供了丰富的学习资源链接。",
+      "tags": [
+        "Scala",
+        "Scala3",
+        "News",
+        "Development"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da27e3c06c2",
+      "title": "New App: Imago",
+      "link": "https://sindresorhus.com/imago",
+      "feedTitle": "Sindre Sorhus — Blog",
+      "published": 1774137600,
+      "summary": "介绍新应用Imago，这是一款基于FLUX.2模型的本地文本生成图像工具，专为Apple Silicon Mac设计。应用支持快捷键操作和元数据保存，目前免费无广告。主要硬件要求为M芯片、16GB内存及20GB磁盘空间，不支持iOS、自定义模型或图像修复功能。",
+      "tags": [
+        "macOS",
+        "AI",
+        "Image Generation",
+        "FLUX",
+        "Apple Silicon"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d96f4948b2b",
+      "title": "小龙虾 webchat 的 bug",
+      "link": "https://manateelazycat.github.io/2026/03/22/openclaw-thinking-issue/",
+      "feedTitle": "Andy Stewart",
+      "published": 1774108800,
+      "summary": "作者在开发小龙虾聊天工具的“思考过程”功能时发现一个Bug：历史记录能显示AI的流式思考内容，但最新的实时回复却无法转发。这导致用户只能看到历史记录，看不到当前的思考进展。作者幽默地让小龙虾自己填写Github issue模板并提交了报告。",
+      "tags": [
+        "Bug",
+        "Chatbot",
+        "OpenClaw",
+        "Debugging"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d96f4948b2a",
+      "title": "小龙虾上传图片的方法",
+      "link": "https://manateelazycat.github.io/2026/03/22/openclaw-upload-image/",
+      "feedTitle": "Andy Stewart",
+      "published": 1774108800,
+      "summary": "作者在开发小龙虾工具的上传图片功能时，因自定义协议触发了AI的安全审查。虽然AI建议使用接口，但超过5MB的图片会被压缩导致模糊。最终解决方案是利用`chat.inject`接口绕过安全检查进行本地记录，并额外发送文本消息告知AI图片已上传。",
+      "tags": [
+        "Image Upload",
+        "Security",
+        "Chatbot",
+        "Development",
+        "API"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d9679c7920c",
+      "title": "Profiling Hacker News users based on their comments",
+      "link": "https://simonwillison.net/2026/Mar/21/profiling-hacker-news-users/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1774137587,
+      "summary": "作者分享了利用LLM分析Hacker News用户评论的实验。通过Algolia API获取用户1000条评论，并输入给Claude生成“用户画像”。分析结果涵盖了职业身份、对AI辅助编程（代理工程）的观点、工作方式（如移动端开发）及技术兴趣，展示了LLM处理大量数据的强大能力。",
+      "tags": [
+        "LLM",
+        "Data Analysis",
+        "Hacker News",
+        "User Profiling",
+        "Claude"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064d9679c7920b",
+      "title": "Using Git with coding agents",
+      "link": "https://simonwillison.net/guides/agentic-engineering-patterns/using-git-with-coding-agents/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1774130904,
+      "summary": "文章探讨了如何使用Git与编码智能体配合。Git允许智能体记录变更、浏览本地历史，文章介绍了核心概念（仓库、提交、分支）及交互提示词（如初始化、查看日志、拉取代码），强调利用Git能力可以帮助智能体更好地理解项目上下文，提升开发效率。",
+      "tags": [
+        "Git",
+        "Coding Agents",
+        "Development",
+        "Workflow",
+        "Automation"
+      ]
+    }
+  ]
+}
