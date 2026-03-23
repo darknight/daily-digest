@@ -1,6 +1,6 @@
 {
   "date": "2026-03-23",
-  "fetchedAt": "2026-03-23T00:28:29.335Z",
+  "fetchedAt": "2026-03-23T04:47:12.630Z",
   "articles": [
     {
       "id": "tag:google.com,2005:reader/item/00064da2f649b7aa",
@@ -61,7 +61,109 @@
       "feedTitle": "Simon Willison's Weblog",
       "summary": "Git is a key tool for working with coding agents. Keeping code in version control lets us record how that code changes over time and investigate and reverse any mistakes. All of the coding agents are fluent in using Git's features, both basic and advanced.\nThis fluency means we can be more ambitious about how we use Git ourselves. We don't need to  memorize how to do things with Git, but staying aware of what's possible means we can take advantage of the full suite of Git's abilities.\nGit essentials\nEach Git project lives in a repository - a folder on disk that can track changes made to the files within it. Those changes are recorded in commits - timestamped bundles of changes to one or more files accompanied by a commit message describing those changes and an author recording who made them.\nGit supports branches, which allow you to construct and experiment with new changes independently of each other. Branches can then be merged back into your main branch (using various methods) once they are deemed ready.\nGit repositories can be cloned onto a new machine, and that clone includes both the current files and the full history of changes to them.\nThis means developers - or coding agents - can browse and explore that history without any extra network traffic, making history diving effectively free.\nGit repositories can live just on your own machine,  but Git is designed to support collaboration and backups by publishing them to a remote, which can be public or private. GitHub is the most popular place for these remotes but Git is open source software that enables hosting these remotes on any machine or service that supports the Git protocol.\nCore concepts and prompts\nCoding agents all have a deep understanding of Git jargon. The following prompts should work with any of them:\n\nTo turn the folder the agent is working in into a Git repository - the agent will probably run the git init command. If you just say \"repo\" agents will assume you mean a Git repository.\n\nCreate a new Git commit to record the changes the agent has made - usually with the git commit -m \"commit message\" command.\n\nThis should configure your repository for GitHub. You'll need to create a new repo first using github.com/new, and configure your machine to talk to GitHub.\n\nOr \"recent changes\" or \"last three commits\".\nThis is a great way to start a fresh coding agents session. Telling the agent to look at recent changes causes it to run git log, which can instantly load its context with details of what you have been working on recently - both the modified code and the commit messages that describe it.\nSeeding the session in this way means you can start talking about that code - suggest additional fixes, ask questions about how it works, or propose the next change that builds on what came before.\n\nRun this on your main branch to fetch other contributions from the remote repository, or run it in a branch to integrate the latest changes on main.\nThere are multiple ways to merge changes, including merge, rebase, squash or fast-forward. If you can't remember the details of these that's fine:\n\nAgents are great at explaining the pros and cons of different merging strategies, and everything in git can always be undone so there's minimal risk in trying new things.\n\nI use this universal prompt surprisingly often! There are plenty of ways you can get into a mess with Git, often through pulls or rebase commands that end in a merge conflict, or just through adding the wrong things to Git's staging environment.\nUnpicking those used to be the most difficult and time consuming parts of working with Git. No more! Coding agents can navigate the most Byzantine of merge conflicts, reasoning through the intent of the new code and figuring out what to keep and how to combine conflicting changes. If your code has automated tests (and it should) the agent can ensure those pass before finalizing that merge.\n\nIf you lose code that you are working on that's previously been committed (or saved with git stash) your agent can probably find it for you. \nGit has a mechanism called the reflog which can often capture details of code that hasn't been committed to a permanent branch. Agents can search that, and search other branches too.\nJust tell them what to find and watch them dive in.\n\nGit bisect is one of the most powerful debugging tools in Git's arsenal, but it has a relatively steep learning curve that often deters developers from using it.\nWhen you run a bisect operation you provide Git with some kind of test condition and a start and ending commit range. Git then runs a binary search to identify the earliest commit for which your test condition fails. \nThis can efficiently answer the question \"what first caused this bug\". The only downside is the need to express the test for the bug in a format that Git bisect can execute.\nCoding agents can handle this boilerplate for you. This upgrades Git bisect from an occasional use tool to one you can deploy any time you are curious about the historic behavior of your software.\nRewriting history\nLet's get into the fun advanced stuff.\nThe commit history of a Git repository is not fixed. The data is just files on disk after all (tucked away in a hidden .git/ directory), and Git itself provides tools that can be used to modify that history.\nDon't think of the Git history as a permanent record of what actually happened - instead consider it to be a deliberately authored story that describes the progression of the software project.\nThis story is a tool to aid future development. Permanently recording mistakes and cancelled directions can sometimes be useful, but repository authors can make editorial decisions about what to keep and how best to capture that history.\nCoding agents are really good at using Git's advanced history rewriting features.\nUndo or rewrite commits\n\nIt's common to commit code and then regret it - realize that it includes a file you didn't mean to include, for example. The git recipe for this is git reset --soft HEAD~1. I've never been able to remember that, and now I don't have to!\n\nYou can also perform more finely grained surgery on commits - rewriting them to remove just a single file, for example.\n\nAgents can rewrite commit messages and can combine multiple commits into a single unit.\nI've found that frontier models usually have really good taste in commit messages. I used to insist on writing these myself but I've accepted that the quality they produce is generally good enough, and often even better than what I would have produced myself.\nBuilding a new repository from scraps of an older one\nA trick I find myself using quite often is extracting out code from a larger repository into a new one while maintaining the key history of that code.\nOne common example is library extraction. I may have built some classes and functions into a project and later realized they would make more sense as a standalone reusable code library.\n\nThis kind of operation used to be involved enough that most developers would create a fresh copy detached from that old commit history. We don't have to settle for that any more!",
       "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2fc",
+      "title": "Beats now have notes",
+      "link": "https://simonwillison.net/2026/Mar/23/beats-now-have-notes/#atom-everything",
+      "published": 1774231993,
+      "feedId": "feed/18",
+      "feedTitle": "Simon Willison's Weblog",
+      "summary": "23rd March 2026\n\n\nLast month I added a feature I call beats to this blog, pulling in some of my other content from external sources and including it on the homepage, search and various archive pages on the site.\nOn any given day these frequently outnumber my regular posts. They were looking a little bit thin and were lacking any form of explanation beyond a link, so I've added the ability to annotate them with a \"note\" which now shows up as part of their display.\nHere's what that looks like for the content I published yesterday:\n\nI've also updated the /atom/everything/ Atom feed to include any beats that I've attached notes to.",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2fb",
+      "title": "Starlette 1.0 skill",
+      "link": "https://simonwillison.net/2026/Mar/23/starlette-1-skill/#atom-everything",
+      "published": 1774224300,
+      "feedId": "feed/18",
+      "feedTitle": "Simon Willison's Weblog",
+      "summary": "Research\n    \n    Starlette 1.0 skill\n    — Starlette 1.0 Skill offers a concise guide for building robust web applications with Starlette, a lightweight ASGI framework. The accompanying demo showcases a task management app featuring projects, tasks, comments, and labels, illustrating Starlette's flexibility in handling routing, templating (Jinja2), async database operations (aiosqlite), and real-time updates.\n  \nSee Experimenting with Starlette 1.0 with Claude skills.",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2fa",
+      "title": "Experimenting with Starlette 1.0 with Claude skills",
+      "link": "https://simonwillison.net/2026/Mar/22/starlette/#atom-everything",
+      "published": 1774223864,
+      "feedId": "feed/18",
+      "feedTitle": "Simon Willison's Weblog",
+      "summary": "22nd March 2026\n\n\n\nStarlette 1.0 is out! This is a really big deal. I think Starlette may be the Python framework with the most usage compared to its relatively low brand recognition because Starlette is the foundation of FastAPI, which has attracted a huge amount of buzz that seems to have overshadowed Starlette itself.\nKim Christie started working on Starlette in 2018 and it quickly became my favorite out of the new breed of Python ASGI frameworks. The only reason I didn’t use it as the basis for my own Datasette project was that it didn’t yet promise stability, and I was determined to provide a stable API for Datasette’s own plugins... albeit I still haven’t been brave enough to ship my own 1.0 release (after 26 alphas and counting)!\nThen in September 2025 Marcelo Trylesinski announced that Starlette and Uvicorn were transferring to their GitHub account, in recognition of their many years of contributions and to make it easier for them to receive sponsorship against those projects.\nThe 1.0 version has a few breaking changes compared to the 0.x series, described in the release notes for 1.0.0rc1 that came out in February.\nThe most notable of these is a change to how code runs on startup and shutdown. Previously that was handled by on_startup and on_shutdown parameters, but the new system uses a neat lifespan mechanism instead based around an async context manager:\n@contextlib.asynccontextmanager\nasync def lifespan(app):\n    async with some_async_resource():\n        print(\"Run at startup!\")\n        yield\n        print(\"Run on shutdown!\")\n\napp = Starlette(\n    routes=routes,\n    lifespan=lifespan\n)\nIf you haven’t tried Starlette before it feels to me like an asyncio-native cross between Flask and Django, unsurprising since creator Kim Christie is also responsible for Django REST Framework. Crucially, this means you can write most apps as a single Python file, Flask style.\nThis makes it really easy for LLMs to spit out a working Starlette app from a single prompt.\nThere’s just one problem there: if 1.0 breaks compatibility with the Starlette code that the models have been trained on, how can we have them generate code that works with 1.0?\nI decided to see if I could get this working with a Skill.\nBuilding a Skill with Claude\nRegular Claude Chat on claude.ai has skills, and one of those default skills is the skill-creator skill. This means Claude knows how to build its own skills.\nSo I started a chat session and told it:\n\nClone Starlette from GitHub—it just had its 1.0 release. Build a skill markdown document for this release which includes code examples of every feature.\n\nI didn’t even tell it where to find the repo, Starlette is widely enough known that I expected it could find it on its own.\nIt ran git clone https://github.com/encode/starlette.git which is actually the old repository name, but GitHub handles redirects automatically so this worked just fine.\nThe resulting skill document looked very thorough to me... and then I noticed a new button at the top I hadn’t seen before labelled “Copy to your skills”. So I clicked it:\n\nAnd now my regular Claude chat has access to that skill!\nA task management demo app\nI started a new conversation and prompted:\n\nBuild a task management app with Starlette, it should have projects and tasks and comments and labels\n\nAnd Claude did exactly that, producing a simple GitHub Issues clone using Starlette 1.0, a SQLite database (via aiosqlite) and a Jinja2 template.\nClaude even tested the app manually like this:\ncd /home/claude/taskflow && timeout 5 python -c \"\nimport asyncio\nfrom database import init_db\nasyncio.run(init_db())\nprint('DB initialized successfully')\n\" 2>&1\n\npip install httpx --break-system-packages -q \\\n  && cd /home/claude/taskflow && \\\n  python -c \"\nfrom starlette.testclient import TestClient\nfrom main import app\n\nclient = TestClient(app)\n\nr = client.get('/api/stats')\nprint('Stats:', r.json())\n\nr = client.get('/api/projects')\nprint('Projects:', len(r.json()), 'found')\n\nr = client.get('/api/tasks')\nprint('Tasks:', len(r.json()), 'found')\n\nr = client.get('/api/labels')\nprint('Labels:', len(r.json()), 'found')\n\nr = client.get('/api/tasks/1')\nt = r.json()\nprint(f'Task 1: \\\"{t[\\\"title\\\"]}\\\" - {len(t[\\\"comments\\\"])} comments, {len(t[\\\"labels\\\"])} labels')\n\nr = client.post('/api/tasks', json={'title':'Test task','project_id':1,'priority':'high','label_ids':[1,2]})\nprint('Created task:', r.status_code, r.json()['title'])\n\nr = client.post('/api/comments', json={'task_id':1,'content':'Test comment'})\nprint('Created comment:', r.status_code)\n\nr = client.get('/')\nprint('Homepage:', r.status_code, '- length:', len(r.text))\n\nprint('\\nAll tests passed!')\n\"\nFor all of the buzz about Claude Code, it’s easy to overlook that Claude itself counts as a coding agent now, fully able to both write and then test the code that it is writing.\nHere’s what the resulting app looked like. The code is here in my research repository.",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2f9",
+      "title": "PCGamer Article Performance Audit",
+      "link": "https://simonwillison.net/2026/Mar/22/pcgamer-audit/#atom-everything",
+      "published": 1774219740,
+      "feedId": "feed/18",
+      "feedTitle": "Simon Willison's Weblog",
+      "summary": "Research\n    \n    PCGamer Article Performance Audit\n    — A performance audit of the March 2026 PCGamer article on RSS readers reveals severe page bloat, with over 82% of network traffic and transferred bytes traced to ad-tech, tracking, and programmatic advertising scripts. Despite the core content consisting of just 10-15 KB of text and a handful of images (~150 KB total), the page triggers over 431 network requests and 5.5 MB of transfer (18.8 MB decoded) within 60 seconds—ballooning to 200+ MB in Firefox due to autoplay video carousels and…\n  \nStuart Breckenridge pointed out that PC Gamer Recommends RSS Readers in a 37MB Article That Just Keeps Downloading, highlighting a truly horrifying example of web bloat that added up to 100s more MBs thanks to auto-playing video ads. I decided to have Claude Code for web use Rodney to investigate the page - prompt here.",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2f8",
+      "title": "JavaScript Sandboxing Research",
+      "link": "https://simonwillison.net/2026/Mar/22/javascript-sandboxing-research/#atom-everything",
+      "published": 1774209180,
+      "feedId": "feed/18",
+      "feedTitle": "Simon Willison's Weblog",
+      "summary": "Research\n    \n    JavaScript Sandboxing Research\n    — Analyzing current JavaScript sandboxing options for running untrusted code, this research compares core approaches in Node.js (including worker_threads, node:vm, and the Permission Model), prominent npm packages (isolated-vm, vm2), and alternative engines like quickjs-emscripten.\n  \nAaron Harper wrote about Node.js worker threads, which inspired me to run a research task to see if they might help with running JavaScript in a sandbox. Claude Code went way beyond my initial question and produced a comparison of isolated-vm, vm2, quickjs-emscripten, QuickJS-NG, ShadowRealm, and Deno Workers.",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2f7",
+      "title": "DNS Lookup",
+      "link": "https://simonwillison.net/2026/Mar/22/dns/#atom-everything",
+      "published": 1774206990,
+      "feedId": "feed/18",
+      "feedTitle": "Simon Willison's Weblog",
+      "summary": "TIL that Cloudflare's 1.1.1.1 DNS service (and 1.1.1.2 and 1.1.1.3, which block malware and malware + adult content respectively) has a CORS-enabled JSON API, so I had Claude Code build me a UI for running DNS queries against all three of those resolvers.",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2f6",
+      "title": "Merge State Visualizer",
+      "link": "https://simonwillison.net/2026/Mar/22/manyana/#atom-everything",
+      "published": 1774205852,
+      "feedId": "feed/18",
+      "feedTitle": "Simon Willison's Weblog",
+      "summary": "Bram Cohen wrote about his coherent vision for the future of version control using CRDTs, illustrated by 470 lines of Python.\nI fed that Python (minus comments) into Claude and asked for an explanation, then had it use Pyodide to build me an interactive UI for seeing how the algorithms work.",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2f5",
+      "title": "SQLite Tags Benchmark: Comparing 5 Tagging Strategies",
+      "link": "https://simonwillison.net/2026/Mar/20/sqlite-tags-benchmark/#atom-everything",
+      "published": 1773975420,
+      "feedId": "feed/18",
+      "feedTitle": "Simon Willison's Weblog",
+      "summary": "Research\n    \n    SQLite Tags Benchmark: Comparing 5 Tagging Strategies\n    — Benchmarking five tagging strategies in SQLite reveals clear trade-offs between query speed, storage, and implementation complexity for workflows involving tags (100,000 rows, 100 tags, average 6.5 tags/row). Indexed approaches—materialized lookup tables on JSON and classic many-to-many tables—easily outperform others, handling single-tag queries in under 1.5 milliseconds, while raw JSON and LIKE-based solutions are much slower.\n  \nI had Claude Code run a micro-benchmark comparing different approaches to implementing tagging in SQLite. Traditional many-to-many tables won, but FTS5 came a close second. Full table scans with LIKE queries performed better than I expected, but full table scans with JSON arrays and json_each() were much slower.",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2f4",
+      "title": "datasette 1.0a26",
+      "link": "https://simonwillison.net/2026/Mar/18/datasette/#atom-everything",
+      "published": 1773872179,
+      "feedId": "feed/18",
+      "feedTitle": "Simon Willison's Weblog",
+      "summary": "18th March 2026\n\n  Release\n    \n    datasette 1.0a26\n    — An open source multi-tool for exploring and publishing data\n  \nDatasette now has a mechanism for assigning semantic column types. Built-in column types include url, email, and json, and plugins can register additional types using the new register_column_types() plugin hook.\n\n\nPosted 18th March 2026 at 10:16 pm\n\n\n\n\n\nRecent articles\n\n  \n    Experimenting with Starlette 1.0 with Claude skills - 22nd March 2026\n  \n    Profiling Hacker News users based on their comments - 21st March 2026\n  \n    Thoughts on OpenAI acquiring Astral and uv/ruff/ty - 19th March 2026\n  \n\n\n\n\n \n\n\nThis is a beat by Simon Willison, posted on 18th March 2026.\n\n\n\n\n\n  \n    Monthly briefing\n  \n  \n    Sponsor me for $10/month and get a curated email digest of the month's most important LLM developments.\n  \n  \n    Pay me to send you less!\n  \n  \n    Sponsor & subscribe",
+      "contentSource": "readability"
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2f3",
+      "title": "llm 0.29",
+      "link": "https://simonwillison.net/2026/Mar/17/llm/#atom-everything",
+      "published": 1773775450,
+      "feedId": "feed/18",
+      "feedTitle": "Simon Willison's Weblog",
+      "summary": "This is a beat by Simon Willison, posted on 17th March 2026.\n\n\n\n\n\n  \n    Monthly briefing\n  \n  \n    Sponsor me for $10/month and get a curated email digest of the month's most important LLM developments.\n  \n  \n    Pay me to send you less!\n  \n  \n    Sponsor & subscribe",
+      "contentSource": "readability"
     }
   ],
-  "skippedIds": []
+  "skippedIds": [
+    "tag:google.com,2005:reader/item/00064da957a9e2f2"
+  ]
 }

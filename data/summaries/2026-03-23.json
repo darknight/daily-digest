@@ -1,6 +1,6 @@
 {
   "date": "2026-03-23",
-  "summarizedAt": "2026-03-23T00:29:23.942Z",
+  "summarizedAt": "2026-03-23T04:49:24.716Z",
   "model": "zhipu:glm-4.7-flash",
   "summaries": [
     {
@@ -89,6 +89,126 @@
         "Development",
         "Workflow",
         "Automation"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2fc",
+      "title": "Beats now have notes",
+      "link": "https://simonwillison.net/2026/Mar/23/beats-now-have-notes/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1774231993,
+      "summary": "作者为博客新增了名为“beats”的功能，用于整合外部内容。为了解决内容展示单薄的问题，他添加了“note”备注功能来解释这些条目，并更新了 Atom 订阅源以包含带有备注的内容。",
+      "tags": [
+        "Blog",
+        "RSS",
+        "Atom",
+        "Feature",
+        "Content"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2fb",
+      "title": "Starlette 1.0 skill",
+      "link": "https://simonwillison.net/2026/Mar/23/starlette-1-skill/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1774224300,
+      "summary": "Starlette 1.0 Skill 提供了一份构建稳健 Web 应用的指南。配套演示展示了一个任务管理应用，涵盖了路由、Jinja2 模板、异步数据库操作和实时更新等功能，体现了 Starlette 的灵活性。",
+      "tags": [
+        "Starlette",
+        "Python",
+        "Web Framework",
+        "ASGI",
+        "Tutorial"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2fa",
+      "title": "Experimenting with Starlette 1.0 with Claude skills",
+      "link": "https://simonwillison.net/2026/Mar/22/starlette/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1774223864,
+      "summary": "Starlette 1.0 正式发布，作为 FastAPI 的底层框架，引入了基于异步上下文管理器的 lifespan 机制等破坏性变更。作者利用 Claude 的技能功能，成功为 Starlette 1.0 生成了一份包含所有功能代码示例的技能文档。",
+      "tags": [
+        "Starlette",
+        "Python",
+        "FastAPI",
+        "AI",
+        "Claude"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2f9",
+      "title": "PCGamer Article Performance Audit",
+      "link": "https://simonwillison.net/2026/Mar/22/pcgamer-audit/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1774219740,
+      "summary": "对 PC Gamer 关于 RSS 阅读器的文章进行性能审计，发现页面严重臃肿。尽管核心内容仅占 10-15KB，但 82% 的流量来自广告技术和跟踪脚本。该页面触发了 431 个请求，在 Firefox 中因自动播放视频广告导致传输量膨胀至 200MB 以上。",
+      "tags": [
+        "Performance",
+        "Web",
+        "Ads",
+        "JavaScript",
+        "RSS"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2f8",
+      "title": "JavaScript Sandboxing Research",
+      "link": "https://simonwillison.net/2026/Mar/22/javascript-sandboxing-research/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1774209180,
+      "summary": "研究分析了运行不受信任 JavaScript 代码的沙箱选项，对比了 Node.js 内置模块（如 worker_threads）、npm 包及替代引擎，为安全执行代码提供了参考。",
+      "tags": [
+        "Security",
+        "JavaScript",
+        "Node.js",
+        "Sandboxing",
+        "Research"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2f7",
+      "title": "DNS Lookup",
+      "link": "https://simonwillison.net/2026/Mar/22/dns/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1774206990,
+      "summary": "作者发现 Cloudflare DNS 服务拥有 CORS 启用的 JSON API，便利用 Claude Code 构建了一个查询界面，支持通过 1.1.1.1、1.1.1.2 和 1.1.1.3 三个解析器执行 DNS 查询。",
+      "tags": [
+        "DNS",
+        "Cloudflare",
+        "API",
+        "Claude Code",
+        "Tools"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2f6",
+      "title": "Merge State Visualizer",
+      "link": "https://simonwillison.net/2026/Mar/22/manyana/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1774205852,
+      "summary": "Bram Cohen 提出了基于 CRDTs 的版本控制愿景。作者将相关 Python 代码输入 Claude，要求解释后，利用 Pyodide 构建了一个交互式 UI，用于可视化 CRDT 算法的工作原理。",
+      "tags": [
+        "CRDT",
+        "Version Control",
+        "Visualization",
+        "Python",
+        "Pyodide"
+      ]
+    },
+    {
+      "id": "tag:google.com,2005:reader/item/00064da957a9e2f5",
+      "title": "SQLite Tags Benchmark: Comparing 5 Tagging Strategies",
+      "link": "https://simonwillison.net/2026/Mar/20/sqlite-tags-benchmark/#atom-everything",
+      "feedTitle": "Simon Willison's Weblog",
+      "published": 1773975420,
+      "summary": "对 SQLite 中的 5 种标签策略进行基准测试。在 10 万行、100 个标签的数据集上，索引方法（物化查找表和多对多表）表现最佳，单标签查询速度极快。传统多对多表胜出，FTS5 紧随其后。",
+      "tags": [
+        "SQLite",
+        "Benchmark",
+        "Database",
+        "Performance",
+        "Tags"
       ]
     }
   ]
