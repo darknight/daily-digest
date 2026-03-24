@@ -1,0 +1,21 @@
+{
+  "date": "2026-03-24",
+  "summarizedAt": "2026-03-24T00:23:40.820Z",
+  "model": "zhipu:glm-4.7-flash",
+  "summaries": [
+    {
+      "id": "tag:google.com,2005:reader/item/00064daf98b26c52",
+      "title": "我的 App 审核被卡了？ - 肘子的 Swift 周报 #128",
+      "link": "https://fatbobman.com/zh/weekly/issue-128/",
+      "feedTitle": "肘子的 Swift 记事本 ｜ Fatbobman's Blog",
+      "published": 1774274400,
+      "summary": "作者因误操作导致应用未上架，引发对苹果审核变慢的讨论。文章推测“Vibe Coding”热潮导致应用提交量激增，给审核带来压力。作者认为人类审核员在规则判断和弹性方面仍不可或缺，并反对完全由AI接管审核流程，警惕“AI开发至AI审核”的闭环生态。",
+      "tags": [
+        "Swift",
+        "App Store 审核",
+        "AI 编程",
+        "开发体验"
+      ]
+    }
+  ]
+}
