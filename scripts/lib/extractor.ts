@@ -64,10 +64,21 @@ async function extractWithReadability(url: string): Promise<string | null> {
 
 // ── L2: Cloudflare Browser Rendering (markdown endpoint) ─
 
+// Rate limiting: serialize calls with minimum interval to avoid 429
+let brLastCallTime = 0;
+const BR_MIN_INTERVAL_MS = 3_000;
+
 async function extractWithBrowserRendering(url: string): Promise<string | null> {
   const accountId = process.env.CF_ACCOUNT_ID;
   const apiToken = process.env.CF_API_TOKEN;
   if (!accountId || !apiToken) return null;
+
+  // Wait for rate limit interval
+  const elapsed = Date.now() - brLastCallTime;
+  if (elapsed < BR_MIN_INTERVAL_MS) {
+    await new Promise((r) => setTimeout(r, BR_MIN_INTERVAL_MS - elapsed));
+  }
+  brLastCallTime = Date.now();
 
   try {
     const controller = new AbortController();
