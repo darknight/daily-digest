@@ -284,15 +284,22 @@ function renderArchivePage(
   return htmlLayout("RSS 摘要 - 归档", body);
 }
 
-function renderIndexPage(latest: DailySummaries | null): string {
+function renderIndexPage(latest: DailySummaries | null, prevDate: string | null): string {
   if (!latest || latest.summaries.length === 0) {
     return htmlLayout("RSS 每日摘要", `<h1>RSS 每日摘要</h1>\n<p class="subtitle">暂无日报，请稍后再来</p>`);
   }
 
   const cards = latest.summaries.map(renderArticleCard).join("\n");
+
+  let pagination = '<div class="pagination">';
+  pagination += prevDate
+    ? `<a href="/daily/${prevDate}.html">&larr; ${prevDate}</a>`
+    : "<span></span>";
+  pagination += "<span></span></div>";
+
   const statsHtml = renderPipelineStats(latest.stats);
   const header = `<h1>RSS 每日摘要</h1>\n<p class="subtitle">${latest.date} · ${latest.summaries.length} 篇文章 <a href="/archive.html">归档</a></p>`;
-  return htmlLayout("RSS 每日摘要", `${header}\n${cards}\n${statsHtml}`);
+  return htmlLayout("RSS 每日摘要", `${header}\n${cards}\n${pagination}\n${statsHtml}`);
 }
 
 // ── Main ────────────────────────────────────────────────
@@ -304,7 +311,7 @@ async function main() {
   if (jsonKeys.length === 0) {
     console.log("No summaries found in R2, generating empty pages");
     mkdirSync(DIST_DIR, { recursive: true });
-    writeFileSync(join(DIST_DIR, "index.html"), renderIndexPage(null));
+    writeFileSync(join(DIST_DIR, "index.html"), renderIndexPage(null, null));
     writeFileSync(join(DIST_DIR, "archive.html"), renderArchivePage([]));
     return;
   }
@@ -341,7 +348,8 @@ async function main() {
 
   // Generate index page (embed latest)
   const latest = dailies.length > 0 ? dailies[dailies.length - 1] : null;
-  writeFileSync(join(DIST_DIR, "index.html"), renderIndexPage(latest));
+  const prevDateForIndex = dailies.length > 1 ? dailies[dailies.length - 2].date : null;
+  writeFileSync(join(DIST_DIR, "index.html"), renderIndexPage(latest, prevDateForIndex));
   console.log(`  Generated index.html\n`);
 
   console.log("Render complete!");
