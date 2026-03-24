@@ -290,8 +290,9 @@ function renderIndexPage(latest: DailySummaries | null): string {
   }
 
   const cards = latest.summaries.map(renderArticleCard).join("\n");
+  const statsHtml = renderPipelineStats(latest.stats);
   const header = `<h1>RSS 每日摘要</h1>\n<p class="subtitle">${latest.date} · ${latest.summaries.length} 篇文章 <a href="/archive.html">归档</a></p>`;
-  return htmlLayout("RSS 每日摘要", `${header}\n${cards}`);
+  return htmlLayout("RSS 每日摘要", `${header}\n${cards}\n${statsHtml}`);
 }
 
 // ── Main ────────────────────────────────────────────────
