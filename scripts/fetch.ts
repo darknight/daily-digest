@@ -7,11 +7,10 @@
  * Excess articles marked as read
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
 import { FreshRSSClient, getArticleLink } from "./lib/freshrss-client.ts";
 import { extractFullText } from "./lib/extractor.ts";
 import { withConcurrency } from "./lib/ai.ts";
+import { readJSON, writeJSON } from "./lib/r2.ts";
 import type { Article, DailyArticles, RawArticle } from "./lib/types.ts";
 
 // ── Config ──────────────────────────────────────────────
@@ -21,8 +20,7 @@ const MIN_PER_FEED = Number(process.env.MIN_PER_FEED ?? 3);
 const MAX_PER_FEED = Number(process.env.MAX_PER_FEED ?? 10);
 const EXTRACT_CONCURRENCY = 5;
 
-const ROOT = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const ARTICLES_DIR = join(ROOT, "data/articles");
+const articlesKey = (date: string) => `articles/${date}.json`;
 
 // ── Fair Scheduling ─────────────────────────────────────
 
@@ -81,17 +79,18 @@ function fairSchedule(
 
 async function main() {
   const today = new Date().toISOString().slice(0, 10);
-  const outPath = join(ARTICLES_DIR, `${today}.json`);
   const isDryRun = process.argv.includes("--dry-run");
 
   // Load existing articles for incremental mode
   let existingArticles: RawArticle[] = [];
   let existingSkippedIds: string[] = [];
-  if (existsSync(outPath) && !isDryRun) {
-    const existing: DailyArticles = JSON.parse(readFileSync(outPath, "utf-8"));
-    existingArticles = existing.articles;
-    existingSkippedIds = existing.skippedIds;
-    console.log(`Loaded ${existingArticles.length} existing articles, fetching incrementally`);
+  if (!isDryRun) {
+    const existing = await readJSON<DailyArticles>(articlesKey(today));
+    if (existing) {
+      existingArticles = existing.articles;
+      existingSkippedIds = existing.skippedIds;
+      console.log(`Loaded ${existingArticles.length} existing articles, fetching incrementally`);
+    }
   }
 
   // Validate env
@@ -191,7 +190,6 @@ async function main() {
   );
 
   // Save (merge with existing articles in incremental mode)
-  mkdirSync(ARTICLES_DIR, { recursive: true });
   const mergedArticles = [...existingArticles, ...rawArticles];
   const mergedSkippedIds = [...existingSkippedIds, ...skipped.map((a) => a.id)];
   const result: DailyArticles = {
@@ -200,8 +198,8 @@ async function main() {
     articles: mergedArticles,
     skippedIds: mergedSkippedIds,
   };
-  writeFileSync(outPath, JSON.stringify(result, null, 2));
-  console.log(`\nSaved ${mergedArticles.length} articles (${existingArticles.length} existing + ${rawArticles.length} new) to ${outPath}`);
+  await writeJSON(articlesKey(today), result);
+  console.log(`\nSaved ${mergedArticles.length} articles (${existingArticles.length} existing + ${rawArticles.length} new) to R2:${articlesKey(today)}`);
 
   // Mark skipped articles as read
   if (skipped.length > 0 && !process.env.NO_MARK_READ) {
@@ -213,9 +211,9 @@ async function main() {
   }
 
   // Stats
-  const sources = { readability: 0, lightpanda: 0, rss: 0 };
+  const sources = { readability: 0, "browser-rendering": 0, rss: 0 };
   for (const a of rawArticles) sources[a.contentSource]++;
-  console.log(`\nExtraction stats: readability=${sources.readability}, lightpanda=${sources.lightpanda}, rss=${sources.rss}`);
+  console.log(`\nExtraction stats: readability=${sources.readability}, browser-rendering=${sources["browser-rendering"]}, rss=${sources.rss}`);
 }
 
 main().catch((err) => {

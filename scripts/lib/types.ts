@@ -59,7 +59,7 @@ export interface RawArticle {
   feedId: string;
   feedTitle: string;
   summary: string; // RSS summary or full text
-  contentSource: "readability" | "lightpanda" | "rss";
+  contentSource: "readability" | "browser-rendering" | "rss";
 }
 
 export interface DailyArticles {

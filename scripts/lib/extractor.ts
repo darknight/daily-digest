@@ -1,7 +1,7 @@
 import { Readability } from "@mozilla/readability";
 import { JSDOM } from "jsdom";
 
-type ContentSource = "readability" | "lightpanda" | "rss";
+type ContentSource = "readability" | "browser-rendering" | "rss";
 
 export interface ExtractionResult {
   content: string;
@@ -9,6 +9,7 @@ export interface ExtractionResult {
 }
 
 const FETCH_TIMEOUT = 15_000;
+const BROWSER_RENDERING_TIMEOUT = 30_000;
 
 // Patterns that indicate bot-blocking / challenge pages rather than real content
 const BLOCK_PAGE_PATTERNS = [
@@ -55,44 +56,53 @@ async function extractWithReadability(url: string): Promise<string | null> {
     if (isBlockPage(text)) return null;
 
     return text;
-  } catch {
+  } catch (err) {
+    console.warn(`[readability] ${url}: ${err instanceof Error ? err.message : err}`);
     return null;
   }
 }
 
-// ── L2: Lightpanda (headless browser) ───────────────────
+// ── L2: Cloudflare Browser Rendering (markdown endpoint) ─
 
-async function extractWithLightpanda(url: string): Promise<string | null> {
-  const wsUrl = process.env.LIGHTPANDA_URL;
-  if (!wsUrl) return null;
+async function extractWithBrowserRendering(url: string): Promise<string | null> {
+  const accountId = process.env.CF_ACCOUNT_ID;
+  const apiToken = process.env.CF_API_TOKEN;
+  if (!accountId || !apiToken) return null;
 
   try {
-    const puppeteer = await import("puppeteer-core");
-    const browser = await puppeteer.default.connect({
-      browserWSEndpoint: wsUrl,
-    });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), BROWSER_RENDERING_TIMEOUT);
 
-    try {
-      const page = await browser.newPage();
-      await page.goto(url, { waitUntil: "networkidle2", timeout: FETCH_TIMEOUT });
+    const res = await fetch(
+      `https://api.cloudflare.com/client/v4/accounts/${accountId}/browser-rendering/markdown`,
+      {
+        method: "POST",
+        signal: controller.signal,
+        headers: {
+          Authorization: `Bearer ${apiToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          url,
+          gotoOptions: { waitUntil: "networkidle0" },
+        }),
+      },
+    );
+    clearTimeout(timer);
 
-      // Use Lightpanda's native markdown conversion via CDP
-      const client = (page as any)._client();
-      const { markdown } = await client.send("LP.getMarkdown", {});
-      await page.close();
-
-      if (!markdown || markdown.trim().length < 100) {
-        return null;
-      }
-
-      const text = markdown.trim();
-      if (isBlockPage(text)) return null;
-
-      return text;
-    } finally {
-      browser.disconnect();
+    if (!res.ok) {
+      console.warn(`[browser-rendering] ${url}: HTTP ${res.status}`);
+      return null;
     }
-  } catch {
+
+    const data = await res.json() as { success?: boolean; result?: string };
+    if (!data.success || !data.result) return null;
+
+    const text = data.result.trim();
+    if (text.length < 100 || isBlockPage(text)) return null;
+    return text;
+  } catch (err) {
+    console.warn(`[browser-rendering] ${url}: ${err instanceof Error ? err.message : err}`);
     return null;
   }
 }
@@ -121,10 +131,10 @@ export async function extractFullText(
       return { content, source: "readability" };
     }
 
-    // L2: Lightpanda
-    const lpContent = await extractWithLightpanda(url);
-    if (lpContent) {
-      return { content: lpContent, source: "lightpanda" };
+    // L2: Cloudflare Browser Rendering
+    const brContent = await extractWithBrowserRendering(url);
+    if (brContent) {
+      return { content: brContent, source: "browser-rendering" };
     }
   }
 

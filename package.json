@@ -7,7 +7,7 @@
   "scripts": {
     "fetch": "tsx --env-file-if-exists=.env scripts/fetch.ts",
     "summarize": "tsx --env-file-if-exists=.env scripts/summarize.ts",
-    "render": "tsx scripts/render.ts",
+    "render": "tsx --env-file-if-exists=.env scripts/render.ts",
     "update": "pnpm run fetch && pnpm run summarize && pnpm run render",
     "cf:preview": "wrangler pages dev ./dist"
   },
@@ -15,10 +15,10 @@
     "@ai-sdk/anthropic": "^3.0.44",
     "@ai-sdk/google": "^3.0.29",
     "@ai-sdk/openai": "^3.0.29",
+    "@aws-sdk/client-s3": "^3.1015.0",
     "@mozilla/readability": "^0.5.0",
     "ai": "^6.0.86",
-    "jsdom": "^26.1.0",
-    "puppeteer-core": "^24.9.0"
+    "jsdom": "^26.1.0"
   },
   "devDependencies": {
     "@types/jsdom": "^21.1.7",

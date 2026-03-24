@@ -10,13 +10,8 @@ jobs:
   update:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       actions: write
-    services:
-      lightpanda:
-        image: lightpanda/browser:latest
-        ports:
-          - 9222:9222
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -32,7 +27,12 @@ jobs:
           FRESHRSS_API_URL: ${{ secrets.FRESHRSS_API_URL }}
           FRESHRSS_USERNAME: ${{ secrets.FRESHRSS_USERNAME }}
           FRESHRSS_PASSWORD: ${{ secrets.FRESHRSS_PASSWORD }}
-          LIGHTPANDA_URL: ws://localhost:9222
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_BROWSER_RENDERING_TOKEN }}
+          R2_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET_NAME: daily-digest-data
 
       - name: Summarize with AI
         run: pnpm run summarize
@@ -40,32 +40,25 @@ jobs:
           FRESHRSS_API_URL: ${{ secrets.FRESHRSS_API_URL }}
           FRESHRSS_USERNAME: ${{ secrets.FRESHRSS_USERNAME }}
           FRESHRSS_PASSWORD: ${{ secrets.FRESHRSS_PASSWORD }}
-          AI_MODEL: ${{ vars.AI_MODEL || 'zhipu:glm-4.7-flash' }}
+          AI_MODEL: ${{ vars.AI_MODEL || 'anthropic:claude-sonnet-4-6' }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GOOGLE_GENERATIVE_AI_API_KEY: ${{ secrets.GOOGLE_GENERATIVE_AI_API_KEY }}
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+          R2_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET_NAME: daily-digest-data
 
       - name: Render HTML
         run: pnpm run render
-
-      - name: Commit data
-        id: commit
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/
-          if git diff --staged --quiet; then
-            echo "has_changes=false" >> "$GITHUB_OUTPUT"
-          else
-            git commit -m "chore: daily digest $(date +%Y-%m-%d)"
-            git push
-            echo "has_changes=true" >> "$GITHUB_OUTPUT"
-          fi
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET_NAME: daily-digest-data
 
       - name: Trigger deploy
-        if: steps.commit.outputs.has_changes == 'true'
         run: gh workflow run deploy.yml
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-

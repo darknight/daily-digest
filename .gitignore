@@ -139,5 +139,11 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 
+# Data (stored in Cloudflare R2)
+data/
+
+# Wrangler local state
+.wrangler/
+
 plans/
 .claude/

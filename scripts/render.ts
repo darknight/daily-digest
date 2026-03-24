@@ -6,12 +6,12 @@
  * Full regeneration of all pages and navigation links
  */
 
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { readJSON, listKeys } from "./lib/r2.ts";
 import type { ArticleSummary, DailySummaries } from "./lib/types.ts";
 
 const ROOT = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const SUMMARIES_DIR = join(ROOT, "data/summaries");
 const DIST_DIR = join(ROOT, "dist");
 const DAILY_DIR = join(DIST_DIR, "daily");
 
@@ -267,22 +267,23 @@ function renderIndexPage(latest: DailySummaries | null): string {
 
 // ── Main ────────────────────────────────────────────────
 
-function main() {
-  if (!existsSync(SUMMARIES_DIR)) {
-    console.log("Summaries directory not found, generating empty pages");
+async function main() {
+  const keys = await listKeys("summaries/");
+  const jsonKeys = keys.filter((k) => k.endsWith(".json"));
+
+  if (jsonKeys.length === 0) {
+    console.log("No summaries found in R2, generating empty pages");
     mkdirSync(DIST_DIR, { recursive: true });
     writeFileSync(join(DIST_DIR, "index.html"), renderIndexPage(null));
     writeFileSync(join(DIST_DIR, "archive.html"), renderArchivePage([]));
     return;
   }
 
-  const files = readdirSync(SUMMARIES_DIR)
-    .filter((f) => f.endsWith(".json"))
-    .sort(); // chronological
-
-  const dailies: DailySummaries[] = files.map((f) =>
-    JSON.parse(readFileSync(join(SUMMARIES_DIR, f), "utf-8")),
-  );
+  const dailies: DailySummaries[] = [];
+  for (const key of jsonKeys) {
+    const data = await readJSON<DailySummaries>(key);
+    if (data) dailies.push(data);
+  }
 
   console.log(`Found summary data for ${dailies.length} days\n`);
 
@@ -316,4 +317,7 @@ function main() {
   console.log("Render complete!");
 }
 
-main();
+main().catch((err) => {
+  console.error("Fatal error:", err);
+  process.exit(1);
+});

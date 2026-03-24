@@ -3,7 +3,7 @@ import { createOpenAI } from "@ai-sdk/openai";
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 
-const DEFAULT_MODEL = "zhipu:glm-4.7-flash";
+const DEFAULT_MODEL = "anthropic:claude-sonnet-4-6";
 
 const PROVIDER_ENV_KEYS: Record<string, string> = {
   zhipu: "ZHIPU_API_KEY",

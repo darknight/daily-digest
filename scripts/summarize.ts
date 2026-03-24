@@ -7,45 +7,53 @@
  */
 
 import { generateText } from "ai";
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
-import { join } from "node:path";
 import { resolveModel, getModelSpec, withConcurrency, sleep } from "./lib/ai.ts";
+import { readJSON, writeJSON } from "./lib/r2.ts";
 import { FreshRSSClient } from "./lib/freshrss-client.ts";
 import type { DailyArticles, DailySummaries, ArticleSummary, RawArticle } from "./lib/types.ts";
 
 // ── Config ──────────────────────────────────────────────
 
-const BATCH_SIZE = 8;
-const MAX_CONCURRENCY = 3;
+const BATCH_SIZE = 5;
+const MAX_CONCURRENCY = 2;
 const MAX_RETRIES = 3;
 const BASE_DELAY_MS = 500;
 const MIN_CONTENT_LENGTH = 50;
 
-const ROOT = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const ARTICLES_DIR = join(ROOT, "data/articles");
-const SUMMARIES_DIR = join(ROOT, "data/summaries");
+const articlesKey = (date: string) => `articles/${date}.json`;
+const summariesKey = (date: string) => `summaries/${date}.json`;
 
 // ── Prompt ──────────────────────────────────────────────
 
-const SYSTEM_PROMPT = `你是一名专业的文章摘要助手。你的任务是为 RSS 文章生成简洁的中文摘要和标签。
+const SYSTEM_PROMPT = `你是一位资深科技编辑，为忙碌的技术从业者撰写每日资讯摘要。
 
 ## 输出格式
 
-你必须返回一个严格的 JSON 数组（不要包含 markdown 代码块标记），每个元素对应一篇文章：
+返回严格的 JSON 数组（不要 markdown 代码块），每个元素：
 [
   {
     "id": "文章 ID",
-    "summary": "100-200字的中文摘要",
+    "summary": "80-150字中文摘要",
     "tags": ["标签1", "标签2", "标签3"]
   }
 ]
 
-## 要求
+## 摘要风格
 
-- 摘要应为 100-200 个中文字符，涵盖文章的核心内容和关键观点
-- 3-5 个标签，使用中文或与文章内容相关的常用术语
-- 如果文章内容不足或无法理解，根据标题生成一句简短的中文描述
-- 保持客观，不添加个人观点`;
+- 直接切入核心信息，第一句话就传递最关键的内容
+- 好的写法：「Rust 1.85 引入异步闭包语法，解决了长期困扰开发者的生命周期标注问题。新语法允许……」
+- 禁止使用以下开头模式：「作者xxx」「这篇文章xxx」「介绍xxx」「本文xxx」「文章探讨了xxx」
+- 用具体数据、名称、技术细节替代笼统描述
+- 保持信息密度，避免空洞评价（如「值得关注」「意义重大」）
+
+## 标签
+
+- 3-5 个标签，优先使用具体技术名词（如 Rust, WebAssembly, GPT-5）
+- 避免过于宽泛的标签（如「技术」「互联网」）
+
+## 兜底
+
+如果正文不足以理解文章，基于标题写一句简短的事实性描述即可。`;
 
 function buildBatchPrompt(articles: RawArticle[]): string {
   const blocks = articles
@@ -120,26 +128,23 @@ async function callBatchWithRetry(
 
 async function main() {
   const today = new Date().toISOString().slice(0, 10);
-  const articlesPath = join(ARTICLES_DIR, `${today}.json`);
-  const summariesPath = join(SUMMARIES_DIR, `${today}.json`);
 
-  if (!existsSync(articlesPath)) {
-    console.error(`Articles file not found: ${articlesPath}`);
+  const dailyArticles = await readJSON<DailyArticles>(articlesKey(today));
+  if (!dailyArticles) {
+    console.error(`Articles not found in R2: ${articlesKey(today)}`);
     console.error("Please run pnpm run fetch first");
     process.exit(1);
   }
-
-  const dailyArticles: DailyArticles = JSON.parse(readFileSync(articlesPath, "utf-8"));
   console.log(`Loaded ${dailyArticles.articles.length} articles (${today})\n`);
 
   // Load existing summaries for incremental processing
   const existingSummaryIds = new Set<string>();
   let existingSummaries: ArticleSummary[] = [];
 
-  if (existsSync(summariesPath)) {
-    const existing: DailySummaries = JSON.parse(readFileSync(summariesPath, "utf-8"));
-    existingSummaries = existing.summaries;
-    for (const s of existing.summaries) {
+  const existingData = await readJSON<DailySummaries>(summariesKey(today));
+  if (existingData) {
+    existingSummaries = existingData.summaries;
+    for (const s of existingData.summaries) {
       existingSummaryIds.add(s.id);
     }
     console.log(`Found ${existingSummaryIds.size} existing summaries, processing incrementally\n`);
@@ -207,16 +212,15 @@ async function main() {
     console.log(`\nAdded ${newSummaries.length} new summaries`);
   }
 
-  // Save summaries
-  mkdirSync(SUMMARIES_DIR, { recursive: true });
+  // Save summaries to R2
   const result: DailySummaries = {
     date: today,
     summarizedAt: new Date().toISOString(),
     model: getModelSpec(),
     summaries: existingSummaries,
   };
-  writeFileSync(summariesPath, JSON.stringify(result, null, 2));
-  console.log(`Saved to ${summariesPath}`);
+  await writeJSON(summariesKey(today), result);
+  console.log(`Saved to R2:${summariesKey(today)}`);
 
   // Mark all fetched articles as read
   const apiUrl = process.env.FRESHRSS_API_URL;
@@ -224,12 +228,20 @@ async function main() {
   const password = process.env.FRESHRSS_PASSWORD;
 
   if (apiUrl && username && password && !process.env.NO_MARK_READ) {
-    const allArticleIds = dailyArticles.articles.map((a) => a.id);
-    if (allArticleIds.length > 0) {
-      console.log(`\nMarking ${allArticleIds.length} articles as read...`);
+    // Only mark articles that were successfully summarized as read
+    const summarizedIds = new Set(existingSummaries.map((s) => s.id));
+    const idsToMark = dailyArticles.articles
+      .filter((a) => summarizedIds.has(a.id))
+      .map((a) => a.id);
+    const unsummarized = dailyArticles.articles.length - idsToMark.length;
+    if (unsummarized > 0) {
+      console.log(`\n${unsummarized} articles not summarized, keeping them unread for retry`);
+    }
+    if (idsToMark.length > 0) {
+      console.log(`Marking ${idsToMark.length} summarized articles as read...`);
       const client = new FreshRSSClient({ apiUrl, username, password });
       await client.authenticate();
-      await client.markAsRead(allArticleIds);
+      await client.markAsRead(idsToMark);
       console.log("Done");
     }
   } else if (process.env.NO_MARK_READ) {
