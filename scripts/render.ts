@@ -9,7 +9,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { readJSON, listKeys } from "./lib/r2.ts";
-import type { ArticleSummary, DailySummaries } from "./lib/types.ts";
+import type { ArticleSummary, DailySummaries, PipelineStats } from "./lib/types.ts";
 
 const ROOT = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
 const DIST_DIR = join(ROOT, "dist");
@@ -146,6 +146,15 @@ h1 { font-size: 1.5em; margin-bottom: 4px; }
   padding: 3rem 0;
 }
 
+.pipeline-stats {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.75em;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
 @media (max-width: 600px) {
   body { padding: 12px; }
   h1 { font-size: 1.25em; }
@@ -230,11 +239,31 @@ function renderDailyPage(
 
   const header = `<h1>RSS 每日摘要</h1>\n<p class="subtitle">${daily.date} · ${daily.summaries.length} 篇文章 <a href="/archive.html">归档</a></p>`;
 
+  const statsHtml = renderPipelineStats(daily.stats);
+
   const body = daily.summaries.length > 0
-    ? `${header}\n${cards}\n${pagination}`
-    : `${header}\n<div class="empty">当天没有文章</div>`;
+    ? `${header}\n${cards}\n${pagination}\n${statsHtml}`
+    : `${header}\n<div class="empty">当天没有文章</div>\n${statsHtml}`;
 
   return htmlLayout(`RSS 摘要 - ${daily.date}`, body);
+}
+
+function renderPipelineStats(stats?: PipelineStats): string {
+  if (!stats) return "";
+
+  const sources = Object.entries(stats.extractionSources)
+    .map(([k, v]) => `${k} ${v}`)
+    .join(" / ");
+
+  const parts = [
+    `未读 ${stats.totalUnread}`,
+    `抓取 ${stats.fetched}`,
+    `摘要 ${stats.summarized}`,
+  ];
+  if (stats.failed > 0) parts.push(`失败 ${stats.failed}`);
+  if (stats.skipped > 0) parts.push(`跳过 ${stats.skipped}`);
+
+  return `<div class="pipeline-stats">${parts.join(" → ")} · 提取: ${sources}</div>`;
 }
 
 function renderArchivePage(

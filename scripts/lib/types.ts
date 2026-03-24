@@ -67,6 +67,7 @@ export interface DailyArticles {
   fetchedAt: string; // ISO timestamp
   articles: RawArticle[];
   skippedIds: string[]; // article IDs marked read due to quota overflow
+  totalUnread?: number; // total unread count from FreshRSS before filtering
 }
 
 export interface ArticleSummary {
@@ -79,9 +80,19 @@ export interface ArticleSummary {
   tags: string[];
 }
 
+export interface PipelineStats {
+  totalUnread: number;
+  fetched: number;
+  skipped: number;
+  summarized: number;
+  failed: number;
+  extractionSources: Record<string, number>;
+}
+
 export interface DailySummaries {
   date: string;
   summarizedAt: string;
   model: string;
   summaries: ArticleSummary[];
+  stats?: PipelineStats;
 }

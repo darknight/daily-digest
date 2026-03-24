@@ -10,7 +10,7 @@ import { generateText } from "ai";
 import { resolveModel, getModelSpec, withConcurrency, sleep } from "./lib/ai.ts";
 import { readJSON, writeJSON } from "./lib/r2.ts";
 import { FreshRSSClient } from "./lib/freshrss-client.ts";
-import type { DailyArticles, DailySummaries, ArticleSummary, RawArticle } from "./lib/types.ts";
+import type { DailyArticles, DailySummaries, ArticleSummary, RawArticle, PipelineStats } from "./lib/types.ts";
 
 // ── Config ──────────────────────────────────────────────
 
@@ -212,12 +212,27 @@ async function main() {
     console.log(`\nAdded ${newSummaries.length} new summaries`);
   }
 
+  // Compute pipeline stats
+  const extractionSources: Record<string, number> = {};
+  for (const a of dailyArticles.articles) {
+    extractionSources[a.contentSource] = (extractionSources[a.contentSource] ?? 0) + 1;
+  }
+  const stats: PipelineStats = {
+    totalUnread: dailyArticles.totalUnread ?? dailyArticles.articles.length,
+    fetched: dailyArticles.articles.length,
+    skipped: dailyArticles.skippedIds.length,
+    summarized: existingSummaries.length,
+    failed: dailyArticles.articles.length - existingSummaries.length,
+    extractionSources,
+  };
+
   // Save summaries to R2
   const result: DailySummaries = {
     date: today,
     summarizedAt: new Date().toISOString(),
     model: getModelSpec(),
     summaries: existingSummaries,
+    stats,
   };
   await writeJSON(summariesKey(today), result);
   console.log(`Saved to R2:${summariesKey(today)}`);

@@ -197,6 +197,7 @@ async function main() {
     fetchedAt: new Date().toISOString(),
     articles: mergedArticles,
     skippedIds: mergedSkippedIds,
+    totalUnread: allArticles.length,
   };
   await writeJSON(articlesKey(today), result);
   console.log(`\nSaved ${mergedArticles.length} articles (${existingArticles.length} existing + ${rawArticles.length} new) to R2:${articlesKey(today)}`);
