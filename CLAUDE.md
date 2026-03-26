@@ -26,18 +26,18 @@ All scripts use `tsx --env-file=.env`, so a `.env` file is required for local ru
 
 ## Architecture
 
-Three-stage TypeScript data pipeline, no framework:
+Three-stage TypeScript data pipeline, no framework. Data stored in Cloudflare R2:
 
 ```
-fetch.ts → data/articles/YYYY-MM-DD.json
-summarize.ts → data/summaries/YYYY-MM-DD.json
+fetch.ts → R2: articles/YYYY-MM-DD.json
+summarize.ts → R2: summaries/YYYY-MM-DD.json
 render.ts → dist/ (index.html, archive.html, daily/*.html)
 ```
 
 ### Key modules in `scripts/lib/`
 
 - **`freshrss-client.ts`** — GReader API client (translated from Python `freshrss` skill). Auth via ClientLogin, pagination via continuation tokens.
-- **`extractor.ts`** — Full-text extraction with 3-layer fallback: `@mozilla/readability` → Lightpanda headless browser → RSS summary strip.
+- **`extractor.ts`** — Full-text extraction with 3-layer fallback: `@mozilla/readability` → Cloudflare Browser Rendering API → RSS summary strip.
 - **`ai.ts`** — `resolveModel("provider:model")` factory supporting zhipu/openai/anthropic/google via Vercel AI SDK. Also exports `withConcurrency()` for parallel batch processing.
 - **`types.ts`** — Shared interfaces: `RawArticle`, `DailyArticles`, `ArticleSummary`, `DailySummaries`.
 
@@ -50,7 +50,7 @@ render.ts → dist/ (index.html, archive.html, daily/*.html)
 
 ## AI Model
 
-Default: `zhipu:glm-4.7-flash` (free tier). Format: `provider:model`. Set via `AI_MODEL` env var. Each provider requires its corresponding API key env var (e.g., `ZHIPU_API_KEY`).
+CI default: `anthropic:claude-sonnet-4-6`. Local default in `.env.example`: `zhipu:glm-4.7-flash` (free tier). Format: `provider:model`. Set via `AI_MODEL` env var. Each provider requires its corresponding API key env var (e.g., `ZHIPU_API_KEY`, `ANTHROPIC_API_KEY`).
 
 ## Git Rebase Conflict Resolution
 
@@ -63,5 +63,5 @@ When resolving conflicts during `git rebase`, use `git checkout --theirs <file>`
 ## Deployment
 
 Cloudflare Pages via `wrangler`. Two GitHub Actions workflows:
-- `daily-digest.yml` — cron UTC 00:00 (Beijing 08:00): fetch → summarize → render → commit data/ → deploy
-- `deploy.yml` — push to main: render → deploy
+- `daily-digest.yml` — cron UTC 00:00 & 04:00 (Beijing 08:00 & 12:00): fetch → summarize → render → trigger deploy
+- `deploy.yml` — push to main (or triggered by daily-digest): render → deploy
