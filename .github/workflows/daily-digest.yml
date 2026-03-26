@@ -21,21 +21,6 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
 
-      - name: Debug FreshRSS connectivity
-        run: |
-          echo "=== Response Headers ==="
-          curl -s -D - -o /tmp/resp.html "$FRESHRSS_API_URL/accounts/ClientLogin" \
-            -X POST -d "Email=$FRESHRSS_USERNAME&Passwd=$FRESHRSS_PASSWORD" \
-            -H "Content-Type: application/x-www-form-urlencoded" \
-            | head -30
-          echo ""
-          echo "=== Response Body (first 50 lines) ==="
-          head -50 /tmp/resp.html
-        env:
-          FRESHRSS_API_URL: ${{ secrets.FRESHRSS_API_URL }}
-          FRESHRSS_USERNAME: ${{ secrets.FRESHRSS_USERNAME }}
-          FRESHRSS_PASSWORD: ${{ secrets.FRESHRSS_PASSWORD }}
-
       - name: Fetch articles
         run: pnpm run fetch
         env:

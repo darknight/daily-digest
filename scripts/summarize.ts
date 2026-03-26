@@ -131,9 +131,8 @@ async function main() {
 
   const dailyArticles = await readJSON<DailyArticles>(articlesKey(today));
   if (!dailyArticles) {
-    console.error(`Articles not found in R2: ${articlesKey(today)}`);
-    console.error("Please run pnpm run fetch first");
-    process.exit(1);
+    console.log(`No articles for ${today}, nothing to summarize`);
+    return;
   }
   console.log(`Loaded ${dailyArticles.articles.length} articles (${today})\n`);
 
