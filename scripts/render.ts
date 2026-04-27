@@ -84,10 +84,13 @@ h1 { font-size: 1.5em; margin-bottom: 4px; }
 
 .card h2 a:hover { text-decoration: underline; }
 
+h1 a { color: inherit; text-decoration: none; }
+
+h1 a:hover { color: var(--link); }
+
 .meta {
   font-size: 0.8em;
   color: var(--text-secondary);
-  margin-bottom: 8px;
 }
 
 .tag {
@@ -100,7 +103,7 @@ h1 { font-size: 1.5em; margin-bottom: 4px; }
   margin-right: 6px;
 }
 
-.summary { font-size: 0.92em; color: var(--text); }
+.summary { font-size: 0.92em; color: var(--text); margin-bottom: 12px; }
 
 .pagination {
   display: flex;
@@ -200,14 +203,15 @@ function formatSummary(text: string): string {
 }
 
 function renderArticleCard(article: ArticleSummary): string {
+  const displayTitle = article.titleZh ?? article.title;
   const titleHtml = article.link
-    ? `<a href="${escapeHtml(article.link)}" target="_blank" rel="noopener">${escapeHtml(article.title)}</a>`
-    : escapeHtml(article.title);
+    ? `<a href="${escapeHtml(article.link)}" target="_blank" rel="noopener">${escapeHtml(displayTitle)}</a>`
+    : escapeHtml(displayTitle);
 
   return `<div class="card">
   <h2>${titleHtml}</h2>
-  <div class="meta"><span class="tag">${escapeHtml(article.feedTitle)}</span> ${formatDate(article.published)}</div>
   <div class="summary">${formatSummary(article.summary)}</div>
+  <div class="meta"><span class="tag">${escapeHtml(article.feedTitle)}</span> ${formatDate(article.published)}</div>
 </div>`;
 }
 
@@ -237,7 +241,7 @@ function renderDailyPage(
     : "<span></span>";
   pagination += "</div>";
 
-  const header = `<h1>RSS 每日摘要</h1>\n<p class="subtitle">${daily.date} · ${daily.summaries.length} 篇文章 <a href="/archive.html">归档</a></p>`;
+  const header = `<h1><a href="/">RSS 每日摘要</a></h1>\n<p class="subtitle">${daily.date} · ${daily.summaries.length} 篇文章 <a href="/archive.html">归档</a></p>`;
 
   const statsHtml = renderPipelineStats(daily.stats);
 
@@ -276,7 +280,7 @@ function renderArchivePage(
     )
     .join("\n");
 
-  const header = `<h1>RSS 每日摘要</h1>\n<p class="subtitle">历史归档</p>`;
+  const header = `<h1><a href="/">RSS 每日摘要</a></h1>\n<p class="subtitle">历史归档</p>`;
   const body = dailies.length > 0
     ? `${header}\n<ul class="archive-list">\n${items}\n</ul>`
     : `${header}\n<div class="empty">暂无日报</div>`;
@@ -286,7 +290,7 @@ function renderArchivePage(
 
 function renderIndexPage(latest: DailySummaries | null, prevDate: string | null): string {
   if (!latest || latest.summaries.length === 0) {
-    return htmlLayout("RSS 每日摘要", `<h1>RSS 每日摘要</h1>\n<p class="subtitle">暂无日报，请稍后再来</p>`);
+    return htmlLayout("RSS 每日摘要", `<h1><a href="/">RSS 每日摘要</a></h1>\n<p class="subtitle">暂无日报，请稍后再来</p>`);
   }
 
   const cards = latest.summaries.map(renderArticleCard).join("\n");
@@ -298,7 +302,7 @@ function renderIndexPage(latest: DailySummaries | null, prevDate: string | null)
   pagination += "<span></span></div>";
 
   const statsHtml = renderPipelineStats(latest.stats);
-  const header = `<h1>RSS 每日摘要</h1>\n<p class="subtitle">${latest.date} · ${latest.summaries.length} 篇文章 <a href="/archive.html">归档</a></p>`;
+  const header = `<h1><a href="/">RSS 每日摘要</a></h1>\n<p class="subtitle">${latest.date} · ${latest.summaries.length} 篇文章 <a href="/archive.html">归档</a></p>`;
   return htmlLayout("RSS 每日摘要", `${header}\n${cards}\n${pagination}\n${statsHtml}`);
 }
 

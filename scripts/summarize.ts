@@ -33,10 +33,18 @@ const SYSTEM_PROMPT = `你是一位资深科技编辑，为忙碌的技术从业
 [
   {
     "id": "文章 ID",
+    "titleZh": "中文标题",
     "summary": "80-150字中文摘要",
     "tags": ["标签1", "标签2", "标签3"]
   }
 ]
+
+## 标题翻译（titleZh）
+
+- 将原标题翻译为简洁、达意的中文标题，保留原标题的信息密度和语气
+- 如果原标题已是中文，原样返回
+- 保留专有名词、产品名、技术名的英文形式（如 React、GPT-5、Rust、WebAssembly）
+- 不要意译失真，不要添加原标题没有的信息
 
 ## 摘要风格
 
@@ -63,7 +71,7 @@ function buildBatchPrompt(articles: RawArticle[]): string {
     )
     .join("\n\n");
 
-  return `请为以下 ${articles.length} 篇文章分别生成中文摘要和标签。返回一个 JSON 数组，按文章顺序一一对应。
+  return `请为以下 ${articles.length} 篇文章分别生成中文标题（titleZh）、中文摘要和标签。返回一个 JSON 数组，按文章顺序一一对应。
 
 ${blocks}`;
 }
@@ -72,7 +80,7 @@ ${blocks}`;
 
 async function callBatchWithRetry(
   articles: RawArticle[],
-): Promise<{ id: string; summary: string; tags: string[] }[]> {
+): Promise<{ id: string; titleZh?: string; summary: string; tags: string[] }[]> {
   const model = resolveModel();
   let lastError: Error | null = null;
 
@@ -186,9 +194,15 @@ async function main() {
           const article = batch[i];
           const result = results[i];
 
+          const titleZh =
+            typeof result.titleZh === "string" && result.titleZh.trim()
+              ? result.titleZh.trim()
+              : undefined;
+
           newSummaries.push({
             id: article.id,
             title: article.title,
+            ...(titleZh ? { titleZh } : {}),
             link: article.link,
             feedTitle: article.feedTitle,
             published: article.published,

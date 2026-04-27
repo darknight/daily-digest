@@ -73,6 +73,7 @@ export interface DailyArticles {
 export interface ArticleSummary {
   id: string;
   title: string;
+  titleZh?: string; // AI-translated Chinese title; falls back to `title` when absent
   link: string | null;
   feedTitle: string;
   published: number;
